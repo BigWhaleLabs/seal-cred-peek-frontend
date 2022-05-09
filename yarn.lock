@@ -2786,10 +2786,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@big-whale-labs/seal-cred-ledger-contract@npm:^0.0.1":
-  version: 0.0.1
-  resolution: "@big-whale-labs/seal-cred-ledger-contract@npm:0.0.1"
-  checksum: 852748e88d8e4154da932c81d186ef9f3803891b90074f58bc90a3d44abe777e148e89ced05021620170aeddf49f120b9a349881f9d7388d2696bcc0d15e0300
+"@big-whale-labs/seal-cred-ledger-contract@npm:^0.0.2":
+  version: 0.0.2
+  resolution: "@big-whale-labs/seal-cred-ledger-contract@npm:0.0.2"
+  checksum: bb829a2cdb17e7b2dcebc7ca5b8ec22e1e40b306ab15c20963793269fd61ce62b7fbae0cc184da41de9fb55220adf571fb846b6215c6653c0eee932cb589dfc7
   languageName: node
   linkType: hard
 
@@ -4168,14 +4168,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/react@npm:^17.0.38":
-  version: 17.0.45
-  resolution: "@types/react@npm:17.0.45"
+"@types/react@npm:^18.0.9":
+  version: 18.0.9
+  resolution: "@types/react@npm:18.0.9"
   dependencies:
     "@types/prop-types": "*"
     "@types/scheduler": "*"
     csstype: ^3.0.2
-  checksum: 3cc13a02824c13f6fa4807a83abd065ac1d9943359e76bd995cc7cd2b4148c1176ebd54a30a9f4eb8a0f141ff359d712876f256c4fee707e4290607ef8410b3e
+  checksum: 162364dad716d9017ee34aabf2ea37499709ebbdef70392ae1b39225985971e1a46f121efb9c5c7da92144ee1d96d4525df806a7c1c03a5db7fd31dd034ddc7a
   languageName: node
   linkType: hard
 
@@ -13614,11 +13614,11 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "seal-cred-admin-frontend@workspace:."
   dependencies:
-    "@big-whale-labs/seal-cred-ledger-contract": ^0.0.1
+    "@big-whale-labs/seal-cred-ledger-contract": ^0.0.2
     "@esbuild-plugins/node-globals-polyfill": ^0.1.1
     "@preact/preset-vite": ^2.2.0
     "@types/node": ^17.0.31
-    "@types/react": ^17.0.38
+    "@types/react": ^18.0.9
     "@typescript-eslint/eslint-plugin": ^5.23.0
     "@typescript-eslint/parser": ^5.23.0
     "@vitejs/plugin-react": ^1.3.2

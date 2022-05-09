@@ -24,7 +24,7 @@
     ]
   },
   "dependencies": {
-    "@big-whale-labs/seal-cred-ledger-contract": "^0.0.1",
+    "@big-whale-labs/seal-cred-ledger-contract": "^0.0.2",
     "@esbuild-plugins/node-globals-polyfill": "^0.1.1",
     "@vitejs/plugin-react": "^1.3.2",
     "@zk-kit/incremental-merkle-tree": "^0.4.3",
