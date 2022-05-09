@@ -8,15 +8,11 @@ import {
   classnames,
   cursor,
   display,
-  flex,
   flexDirection,
   fontWeight,
-  justifyContent,
-  margin,
   opacity,
   outlineStyle,
   padding,
-  space,
   textColor,
 } from 'classnames/tailwind'
 import Spinner from 'components/Spinner'

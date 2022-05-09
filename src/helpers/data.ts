@@ -30,10 +30,12 @@ const data = proxy<DataType>({
 })
 
 function setupERC721Listener(contract: ERC721) {
+  console.log(contract.address)
   // TODO: we need to recalculate the root here
 }
 
 function setupSCERC721DerivativeListener(contract: SCERC721Derivative) {
+  console.log(contract.address)
   // TODO: we need to recalculate the root here
 }
 
