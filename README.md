@@ -21,5 +21,5 @@ Website that shows the current state of the SealCredLedger contract and allows t
 | --------------------------------- | -------------------------------------- |
 | `VITE_APP_BACKEND_URL`            | URL of the backend service             |
 | `VITE_ETH_NETWORK`                | Ethereum network to use                |
-| `VITE_INFURA_ID`                  | Infura API ID                          |
+| `VITE_ETH_WS`                     | Ethereum node websocket URI            |
 | `VITE_SC_LEDGER_CONTRACT_ADDRESS` | Address of the SealCredLedger contract |

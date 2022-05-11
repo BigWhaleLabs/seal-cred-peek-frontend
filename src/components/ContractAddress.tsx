@@ -10,7 +10,7 @@ export default function ContractAddress() {
     <>
       <SubheaderText>Contract address:</SubheaderText>
       <BodyText>
-        <Link url={`https://ropsten.etherscan.io/address/${address}`}>
+        <Link url={`https://rinkeby.etherscan.io/address/${address}`}>
           {address}
         </Link>
       </BodyText>

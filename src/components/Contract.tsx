@@ -32,13 +32,13 @@ export default function Contract({
     <div className={container}>
       <BodyText>
         {!!name && `${name}: `}
-        <Link url={`https://ropsten.etherscan.io/address/${originalAddress}`}>
+        <Link url={`https://rinkeby.etherscan.io/address/${originalAddress}`}>
           {originalAddress}
         </Link>
       </BodyText>
       <BodyText>
         Derivative:{' '}
-        <Link url={`https://ropsten.etherscan.io/address/${derivativeAddress}`}>
+        <Link url={`https://rinkeby.etherscan.io/address/${derivativeAddress}`}>
           {derivativeAddress}
         </Link>
       </BodyText>
