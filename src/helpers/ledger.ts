@@ -3,7 +3,7 @@ import {
   SCERC721Derivative__factory,
   SealCredLedger,
 } from '@big-whale-labs/seal-cred-ledger-contract'
-import Ledger from 'types/Ledger'
+import Ledger from 'models/Ledger'
 import defaultProvider from 'helpers/defaultProvider'
 import queryBlockLimit from 'helpers/queryBlockLimit'
 

@@ -1,10 +1,10 @@
 import { BodyText } from 'components/Text'
 import { useSnapshot } from 'valtio'
 import Contract from 'components/Contract'
-import data from 'helpers/data'
+import SealCredStore from 'stores/SealCredStore'
 
 export default function Ledger() {
-  const { ledger } = useSnapshot(data)
+  const { ledger } = useSnapshot(SealCredStore)
   const contracts = Object.keys(ledger)
   return !contracts.length ? (
     <BodyText>No contracts added yet</BodyText>

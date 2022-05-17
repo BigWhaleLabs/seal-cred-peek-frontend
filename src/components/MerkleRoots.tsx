@@ -1,83 +1,29 @@
 import { BodyText } from 'components/Text'
-import { useEffect, useState } from 'react'
+import { useSnapshot } from 'valtio'
 import { wordBreak } from 'classnames/tailwind'
+import SealCredStore from 'stores/SealCredStore'
 import getMerkleRoot from 'helpers/getMerkleRoot'
-import getOwners from 'helpers/getOwners'
-import sealCred from 'helpers/sealCred'
 
 const root = wordBreak('break-all')
 
-export default function MerkleRoots({ address }: { address: string }) {
-  const [ledgerLoading, setLedgerLoading] = useState(true)
-  const [ledgerRoot, setLedgerRoot] = useState<string | undefined>()
-  const [ledgerError, setLedgerError] = useState<Error | undefined>()
+export default function ({ address }: { address: string }) {
+  const { ledger, originalContractsToOwnersMaps } = useSnapshot(SealCredStore)
 
-  const [realLoading, setRealLoading] = useState(true)
-  const [realRoot, setRealRoot] = useState<string | undefined>()
-  const [realError, setRealError] = useState<Error | undefined>()
-
-  useEffect(() => {
-    async function fetchLedgerRoot() {
-      setLedgerLoading(true)
-      try {
-        const merkleRoot = await sealCred.getRoot(address)
-        setLedgerRoot(merkleRoot)
-      } catch (error) {
-        if (error instanceof Error) {
-          setLedgerError(error)
-        }
-        console.error(error)
-      } finally {
-        setLedgerLoading(false)
-      }
-    }
-
-    async function fetchRealRoot() {
-      setRealLoading(true)
-      try {
-        const owners = await getOwners(address)
-        if (!owners.length) {
-          setRealRoot('No owners found')
-        } else {
-          setRealRoot(getMerkleRoot(owners))
-        }
-      } catch (error) {
-        if (error instanceof Error) {
-          setRealError(error)
-        }
-        console.error(error)
-      } finally {
-        setRealLoading(false)
-      }
-    }
-
-    void fetchLedgerRoot()
-    void fetchRealRoot()
-  }, [address])
+  const tokenToOwnerMap = originalContractsToOwnersMaps[address]
+  const ledgerMerkleRoot = ledger[address].merkleRoot
+  const realMerkleRoot = getMerkleRoot(
+    Array.from(new Set(Object.values(tokenToOwnerMap)))
+  )
 
   return (
-    <>
+    <span className={root}>
+      <BodyText>Ledger merkle root: {ledgerMerkleRoot}</BodyText>
       <BodyText>
-        Ledger merkle root:{' '}
-        <span className={root}>
-          {ledgerLoading
-            ? 'Loading...'
-            : ledgerError
-            ? ledgerError.message
-            : ledgerRoot}
-        </span>
+        {!!ledgerMerkleRoot &&
+          !!realMerkleRoot &&
+          (ledgerMerkleRoot === realMerkleRoot ? '✅' : '❌')}{' '}
+        Real merkle root: {realMerkleRoot}
       </BodyText>
-      <BodyText>
-        {!!ledgerRoot && !!realRoot && (ledgerRoot === realRoot ? '✅' : '❌')}{' '}
-        Real merkle root:{' '}
-        <span className={root}>
-          {realLoading
-            ? 'Loading...'
-            : realError
-            ? realError.message
-            : realRoot}
-        </span>
-      </BodyText>
-    </>
+    </span>
   )
 }

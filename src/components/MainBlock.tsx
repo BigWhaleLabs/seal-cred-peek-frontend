@@ -3,6 +3,7 @@ import AddAddresses from 'components/AddAddresses'
 import ContractAddress from 'components/ContractAddress'
 import DeleteAddresses from 'components/DeleteAddresses'
 import Ledger from 'components/Ledger'
+import MintedCount from 'components/MintedCount'
 import SuspenseWithError from 'components/SuspenseWithError'
 
 export default function MainBlock() {
@@ -18,6 +19,8 @@ export default function MainBlock() {
       <SuspenseWithError error="Error fetching ledger!">
         <Ledger />
       </SuspenseWithError>
+      <SubheaderText>Total minted:</SubheaderText>
+      <MintedCount />
     </>
   )
 }
