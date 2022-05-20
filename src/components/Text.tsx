@@ -1,4 +1,3 @@
-import { FC } from 'react'
 import {
   classnames,
   fontSize,
@@ -8,6 +7,7 @@ import {
   textDecoration,
   wordBreak,
 } from 'classnames/tailwind'
+import ChildrenProp from 'models/ChildrenProp'
 
 const whiteText = classnames(textColor('text-white'))
 const grayText = classnames(textColor('text-gray-300'))
@@ -18,7 +18,7 @@ const headerText = classnames(
   fontWeight('font-bold'),
   margin('mb-6')
 )
-export const HeaderText: FC = ({ children }) => {
+export function HeaderText({ children }: ChildrenProp) {
   return <p className={headerText}>{children}</p>
 }
 
@@ -29,22 +29,17 @@ const subheaderText = classnames(
   margin('my-4'),
   wordBreak('break-all')
 )
-export const SubheaderText: FC = ({ children }) => {
+export function SubheaderText({ children }: ChildrenProp) {
   return <p className={subheaderText}>{children}</p>
 }
 
 const bodyText = classnames(grayText)
-export const BodyText: FC = ({ children }) => {
+export function BodyText({ children }: ChildrenProp) {
   return <p className={bodyText}>{children}</p>
 }
 
-const codeText = classnames(grayText)
-export const CodeText: FC = ({ children }) => {
-  return <code className={codeText}>{children}</code>
-}
-
 const link = classnames(textDecoration('underline'), wordBreak('break-all'))
-export const Link: FC<{ url: string }> = ({ children, url }) => {
+export function Link({ children, url }: ChildrenProp & { url: string }) {
   return (
     <a className={link} href={url} rel="noopener noreferrer" target="_blank">
       {children}
@@ -53,6 +48,6 @@ export const Link: FC<{ url: string }> = ({ children, url }) => {
 }
 
 const errorText = textColor('text-red-500')
-export const ErrorText: FC = ({ children }) => {
+export function ErrorText({ children }: ChildrenProp) {
   return <p className={errorText}>{children}</p>
 }

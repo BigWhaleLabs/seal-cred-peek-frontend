@@ -6,7 +6,7 @@ import Ledger from 'components/Ledger'
 import MintedCount from 'components/MintedCount'
 import SuspenseWithError from 'components/SuspenseWithError'
 
-export default function MainBlock() {
+export default function () {
   return (
     <>
       <HeaderText>SealCred admin panel</HeaderText>

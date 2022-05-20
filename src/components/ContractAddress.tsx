@@ -2,7 +2,7 @@ import { BodyText, Link, SubheaderText } from 'components/Text'
 import { useSnapshot } from 'valtio'
 import data from 'helpers/data'
 
-export default function ContractAddress() {
+export default function () {
   const {
     contractAddress: { address },
   } = useSnapshot(data)

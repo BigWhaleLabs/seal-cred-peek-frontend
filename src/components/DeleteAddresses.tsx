@@ -22,7 +22,7 @@ const form = classnames(
 
 const textField = classnames(padding('p-2'), flexGrow('grow'), margin('my-2'))
 
-export default function DeleteAddresses() {
+export default function () {
   const [addresses, setAddresses] = useState('')
   const [password, setPassword] = useState('')
   const [addressIsValid, setAddressIsValid] = useState(false)
@@ -42,7 +42,7 @@ export default function DeleteAddresses() {
           className={textField}
           type="text"
           placeholder="Addresses"
-          onChange={(e) => setAddresses(e.target.value)}
+          onChange={(e) => setAddresses(e.currentTarget.value)}
           value={addresses}
           disabled={loading}
         />
@@ -50,7 +50,7 @@ export default function DeleteAddresses() {
           className={textField}
           type="password"
           placeholder="Password"
-          onChange={(e) => setPassword(e.target.value)}
+          onChange={(e) => setPassword(e.currentTarget.value)}
           value={password}
           disabled={loading}
         />

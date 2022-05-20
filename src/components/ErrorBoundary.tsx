@@ -4,7 +4,7 @@ import { margin } from 'classnames/tailwind'
 
 const errorContrainer = margin('my-4')
 
-export default class ErrorBoundary extends Component<{
+export default class extends Component<{
   fallbackText: string
 }> {
   state: {

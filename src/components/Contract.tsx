@@ -24,7 +24,7 @@ function MintedCount({ address }: { address: string }) {
 }
 
 const container = margin('mb-4')
-export default function Contract({
+export default function ({
   originalAddress,
   derivativeAddress,
 }: {

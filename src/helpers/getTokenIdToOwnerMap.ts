@@ -5,9 +5,7 @@ import {
 import { QUERY_BLOCK_LIMIT } from '@big-whale-labs/constants'
 import TokenIdToOwnerMap from 'models/TokenIdToOwnerMap'
 
-export default async function getTokenIdToOwnerMap(
-  contract: ERC721 | SCERC721Derivative
-) {
+export default async function (contract: ERC721 | SCERC721Derivative) {
   const eventsFilter = contract.filters.Transfer()
   const events = await contract.queryFilter(eventsFilter, QUERY_BLOCK_LIMIT)
   const ownerMap = {} as TokenIdToOwnerMap

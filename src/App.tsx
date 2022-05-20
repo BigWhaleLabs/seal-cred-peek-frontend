@@ -3,7 +3,7 @@ import { ToastContainer } from 'react-toastify'
 import MainBlock from 'components/MainBlock'
 import Root from 'components/Root'
 
-const App = () => {
+export default function () {
   return (
     <Root>
       <MainBlock />
@@ -11,5 +11,3 @@ const App = () => {
     </Root>
   )
 }
-
-export default App

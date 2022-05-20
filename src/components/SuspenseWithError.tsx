@@ -1,13 +1,15 @@
-import { FC, Suspense } from 'react'
+import { Suspense } from 'react'
+import ChildrenProp from 'models/ChildrenProp'
 import ErrorBoundary from 'components/ErrorBoundary'
 import Loading from 'components/Loading'
 
-const SuspenseWithError: FC<{ error: string }> = ({ error, children }) => {
+export default function ({
+  error,
+  children,
+}: ChildrenProp & { error: string }) {
   return (
     <ErrorBoundary fallbackText={error}>
       <Suspense fallback={<Loading />}>{children}</Suspense>
     </ErrorBoundary>
   )
 }
-
-export default SuspenseWithError

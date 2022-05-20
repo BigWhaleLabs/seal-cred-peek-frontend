@@ -1,4 +1,3 @@
-import { FC } from 'react'
 import {
   alignItems,
   backgroundColor,
@@ -46,7 +45,7 @@ const button = (disabled?: boolean, loading?: boolean) =>
     disabled || loading ? opacity('opacity-50') : undefined,
     disabled || loading ? cursor('cursor-not-allowed') : undefined
   )
-const Button: FC<ButtonProps> = ({ onClick, title, disabled, loading }) => {
+export default function ({ onClick, title, disabled, loading }: ButtonProps) {
   return (
     <button
       className={button(disabled, loading)}
@@ -58,5 +57,3 @@ const Button: FC<ButtonProps> = ({ onClick, title, disabled, loading }) => {
     </button>
   )
 }
-
-export default Button

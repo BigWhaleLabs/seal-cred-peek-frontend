@@ -1,4 +1,3 @@
-import { FC } from 'react'
 import {
   animation,
   classnames,
@@ -15,8 +14,7 @@ const loader = classnames(
   margin('mr-2')
 )
 const icon = classnames(loader, width('w-5'), height('h-5'))
-
-const Spinner: FC = () => {
+export default function () {
   return (
     <svg className={icon} viewBox="0 0 24 24">
       <circle
@@ -35,5 +33,3 @@ const Spinner: FC = () => {
     </svg>
   )
 }
-
-export default Spinner
