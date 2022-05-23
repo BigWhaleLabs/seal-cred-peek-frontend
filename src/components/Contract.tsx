@@ -4,23 +4,12 @@ import { margin } from 'classnames/tailwind'
 import { useSnapshot } from 'valtio'
 import ContractName from 'components/ContractName'
 import MerkleRoots from 'components/MerkleRoots'
-import SealCredStore from 'stores/SealCredStore'
+import StatsStore from 'stores/StatsStore'
 
 function MintedCount({ address }: { address: string }) {
-  const { originalContractsToOwnersMaps, derivativeContractsToOwnersMaps } =
-    useSnapshot(SealCredStore)
-  return (
-    <>
-      (minted:{' '}
-      {
-        Object.keys(
-          originalContractsToOwnersMaps[address] ||
-            derivativeContractsToOwnersMaps[address]
-        ).length
-      }
-      )
-    </>
-  )
+  const { originalCount, derivativeCount } = useSnapshot(StatsStore)
+
+  return <>(minted: {originalCount[address] ?? derivativeCount[address]})</>
 }
 
 const container = margin('mb-4')
