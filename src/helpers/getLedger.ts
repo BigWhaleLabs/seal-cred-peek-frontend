@@ -1,19 +1,24 @@
-import { QUERY_BLOCK_LIMIT } from '@big-whale-labs/constants'
 import { SealCredLedger } from '@big-whale-labs/seal-cred-ledger-contract'
 import Ledger from 'models/Ledger'
+import getAllEvents from 'helpers/getAllEvents'
 import getLedgerRecord from 'helpers/getLedgerRecord'
 
 export default async function (sealCredLedger: SealCredLedger) {
-  const eventsFilter = sealCredLedger.filters.SetMerkleRoot()
-  const events = await sealCredLedger.queryFilter(
-    eventsFilter,
-    QUERY_BLOCK_LIMIT
-  )
+  const { events, deleteTopic } = await getAllEvents(sealCredLedger)
+
   const ledger = {} as Ledger
   const addressToMerkle: { [address: string]: string } = {}
 
   for (const event of events) {
-    const { tokenAddress, merkleRoot } = event.args
+    const {
+      args: { tokenAddress, merkleRoot },
+      topic,
+    } = event
+
+    if (topic === deleteTopic) {
+      delete addressToMerkle[tokenAddress]
+      continue
+    }
     addressToMerkle[tokenAddress] = merkleRoot
   }
 
