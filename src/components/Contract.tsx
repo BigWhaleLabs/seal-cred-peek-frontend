@@ -3,7 +3,6 @@ import { Suspense } from 'react'
 import { margin } from 'classnames/tailwind'
 import { useSnapshot } from 'valtio'
 import ContractName from 'components/ContractName'
-import MerkleRoots from 'components/MerkleRoots'
 import StatsStore from 'stores/StatsStore'
 
 function MintedCount({ address }: { address: string }) {
@@ -39,9 +38,6 @@ export default function ({
           <MintedCount address={derivativeAddress} />
         </Suspense>
       </BodyText>
-      <Suspense fallback={<BodyText>Loading Merkle roots...</BodyText>}>
-        <MerkleRoots address={originalAddress} />
-      </Suspense>
     </div>
   )
 }

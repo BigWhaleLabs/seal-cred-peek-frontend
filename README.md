@@ -19,7 +19,6 @@ Website that shows the current state of the SealCredLedger contract and allows t
 
 | Variable                         | Description                                                         |
 | -------------------------------- | ------------------------------------------------------------------- |
-| `VITE_APP_BACKEND_URL`           | URL of the backend service                                          |
 | `VITE_ETH_NETWORK`               | Ethereum network to use (defaults to @bwl/constants)                |
 | `VITE_ETH_RPC`                   | Ethereum node RPC URI (defaults to @bwl/constants)                  |
 | `VITE_SCLEDGER_CONTRACT_ADDRESS` | Address of the SealCredLedger contract (defaults to @bwl/constants) |

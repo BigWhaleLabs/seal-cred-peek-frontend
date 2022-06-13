@@ -7,14 +7,15 @@ import defaultProvider from 'helpers/defaultProvider'
 
 export default async function (
   sealCredLedger: SealCredLedger,
-  tokenAddress: string,
-  merkleRoot: string
+  originalContract: string
 ) {
   return {
-    merkleRoot,
-    originalContract: ERC721__factory.connect(tokenAddress, defaultProvider),
+    originalContract: ERC721__factory.connect(
+      originalContract,
+      defaultProvider
+    ),
     derivativeContract: SCERC721Derivative__factory.connect(
-      await sealCredLedger.getDerivativeAddress(tokenAddress),
+      await sealCredLedger.getDerivativeContract(originalContract),
       defaultProvider
     ),
   }
