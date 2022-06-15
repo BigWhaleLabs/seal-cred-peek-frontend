@@ -2793,10 +2793,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@big-whale-labs/constants@npm:^0.0.14":
-  version: 0.0.14
-  resolution: "@big-whale-labs/constants@npm:0.0.14"
-  checksum: 99ca815f30d887896e4d2df6801c1877d12e7c13c4301ce206e64b9e0c9fa0ed3861bd872e445e394a5b389a9f689390099c0abf4c64a6e9ed28171b22cc4db3
+"@big-whale-labs/constants@npm:^0.0.15":
+  version: 0.0.15
+  resolution: "@big-whale-labs/constants@npm:0.0.15"
+  checksum: 3a044d2e8519b6ffaabf52aa2a1cf70053af93176acc3227ecd02e01d9b363b6ab29f16dc0cc20830cdb48ee332ba4a544959af1d88240b84c2a1ebaeabfa7a7
   languageName: node
   linkType: hard
 
@@ -4526,10 +4526,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:^17.0.42":
-  version: 17.0.42
-  resolution: "@types/node@npm:17.0.42"
-  checksum: a200cd87e4f12d4d5682a893ad6e1140720c6c074a2cd075f254b3b8306d6174f5a3630e5d2347efb5e9b80d420404b5fafc8fe3c7d4c81998cd914c50b19f75
+"@types/node@npm:^17.0.43":
+  version: 17.0.43
+  resolution: "@types/node@npm:17.0.43"
+  checksum: 7fd84b1e37dc406c1c73a1461ccd6a1a38a5a335563788dd25e0aa75476d6948f815d0e9e4c2201f785a36a72269e6aaf0d851ca75c1e44b92e3a9d504e04a1e
   languageName: node
   linkType: hard
 
@@ -5332,6 +5332,13 @@ __metadata:
   version: 5.0.1
   resolution: "arg@npm:5.0.1"
   checksum: 9aefbcb1204f8dbd541a045bfe99b6515b4dc697c2f704ef2bb5e9fe5464575d97571e91e673a6f23ad72dd1cc24d7d8cf2d1d828e72c08e4d4f6f9237adc761
+  languageName: node
+  linkType: hard
+
+"arg@npm:^5.0.2":
+  version: 5.0.2
+  resolution: "arg@npm:5.0.2"
+  checksum: 6c69ada1a9943d332d9e5382393e897c500908d91d5cb735a01120d5f71daf1b339b7b8980cbeaba8fd1afc68e658a739746179e4315a26e8a28951ff9930078
   languageName: node
   linkType: hard
 
@@ -8169,12 +8176,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eslint-plugin-react-hooks@npm:^4.5.0":
-  version: 4.5.0
-  resolution: "eslint-plugin-react-hooks@npm:4.5.0"
+"eslint-plugin-react-hooks@npm:^4.6.0":
+  version: 4.6.0
+  resolution: "eslint-plugin-react-hooks@npm:4.6.0"
   peerDependencies:
     eslint: ^3.0.0 || ^4.0.0 || ^5.0.0 || ^6.0.0 || ^7.0.0 || ^8.0.0-0
-  checksum: 0389377de635dd9b769f6f52e2c9e6ab857a0cdfecc3734c95ce81676a752e781bb5c44fd180e01953a03a77278323d90729776438815557b069ceb988ab1f9f
+  checksum: 23001801f14c1d16bf0a837ca7970d9dd94e7b560384b41db378b49b6e32dc43d6e2790de1bd737a652a86f81a08d6a91f402525061b47719328f586a57e86c3
   languageName: node
   linkType: hard
 
@@ -13275,10 +13282,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"preact@npm:^10.7.3":
-  version: 10.7.3
-  resolution: "preact@npm:10.7.3"
-  checksum: a0471da77528b9f9478c02bf60ae41754509655a19b65d9fea274a3c94c9583a7b1700e1329ee726ef6dd5307b73cf391d3f7f1b6a9ace43d71a70cd1be92737
+"preact@npm:^10.8.0":
+  version: 10.8.0
+  resolution: "preact@npm:10.8.0"
+  checksum: f9bb56f5eebf26ca28c6efbd6a31cf89224358c3cc5d273813f02794dea9605db4b449e15af9d9c4f804c48d3cf4522f990114850e51b9e17185199e174d2c2b
   languageName: node
   linkType: hard
 
@@ -13305,12 +13312,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"prettier@npm:^2.6.2":
-  version: 2.6.2
-  resolution: "prettier@npm:2.6.2"
+"prettier@npm:^2.7.0":
+  version: 2.7.0
+  resolution: "prettier@npm:2.7.0"
   bin:
     prettier: bin-prettier.js
-  checksum: 48d08dde8e9fb1f5bccdd205baa7f192e9fc8bc98f86e1b97d919de804e28c806b0e6cc685e4a88211aa7987fa9668f30baae19580d87ced3ed0f2ec6572106f
+  checksum: 5b55bb1dced9d16635b83229df8e670d150890fdb343f19e8a66e610094a108e960c0f57352b3e5cdbc4eff4ef00a834406047ffcd9f20bd22a6497ba143c81f
   languageName: node
   linkType: hard
 
@@ -14292,11 +14299,11 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "seal-cred-admin-frontend@workspace:."
   dependencies:
-    "@big-whale-labs/constants": ^0.0.14
+    "@big-whale-labs/constants": ^0.0.15
     "@big-whale-labs/seal-cred-ledger-contract": ^0.0.5
     "@esbuild-plugins/node-globals-polyfill": ^0.1.1
     "@preact/preset-vite": ^2.2.0
-    "@types/node": ^17.0.42
+    "@types/node": ^17.0.43
     "@typescript-eslint/eslint-plugin": ^5.28.0
     "@typescript-eslint/parser": ^5.28.0
     "@vitejs/plugin-react": ^1.3.2
@@ -14311,18 +14318,18 @@ __metadata:
     eslint-plugin-no-relative-import-paths: ^1.3.3
     eslint-plugin-prettier: ^4.0.0
     eslint-plugin-react: ^7.30.0
-    eslint-plugin-react-hooks: ^4.5.0
+    eslint-plugin-react-hooks: ^4.6.0
     eslint-plugin-sort-imports-es6-autofix: ^0.6.0
     eslint-plugin-valtio: ^0.4.4
     ethers: ^5.6.8
     postcss: ^8.4.14
-    preact: ^10.7.3
-    prettier: ^2.6.2
+    preact: ^10.8.0
+    prettier: ^2.7.0
     react-scripts: ^5.0.1
     react-toastify: ^9.0.4
     rollup-plugin-node-polyfills: ^0.2.1
     rollup-plugin-visualizer: ^5.6.0
-    tailwindcss: ^3.1.2
+    tailwindcss: ^3.1.3
     tailwindcss-classnames: ^3.0.5
     typescript: ^4.7.3
     valtio: ^1.6.1
@@ -15123,11 +15130,11 @@ __metadata:
   languageName: node
   linkType: hard
 
-"tailwindcss@npm:^3.1.2":
-  version: 3.1.2
-  resolution: "tailwindcss@npm:3.1.2"
+"tailwindcss@npm:^3.1.3":
+  version: 3.1.3
+  resolution: "tailwindcss@npm:3.1.3"
   dependencies:
-    arg: ^5.0.1
+    arg: ^5.0.2
     chokidar: ^3.5.3
     color-name: ^1.1.4
     detective: ^5.2.1
@@ -15154,7 +15161,7 @@ __metadata:
   bin:
     tailwind: lib/cli.js
     tailwindcss: lib/cli.js
-  checksum: 0c097830374640de83ff4bbed06a891eb74f40cdafdcbfaf69faf65219a6e1b0fadd0cac1da8c70c9633742938e0818c2ba551f9ce47b8051c4e11adebdac8c6
+  checksum: ff7e159301ad1e55db95e9251c27c7d0f2274ac149874201d4ebcca8db2f1d3aba6f1e22ada88499961936d21ec74a82a6aa461064e1a3d0668017e2b0d3658d
   languageName: node
   linkType: hard
 
