@@ -1,16 +1,13 @@
 import { BodyText, Link, SubheaderText } from 'components/Text'
-import { useSnapshot } from 'valtio'
-import data from 'helpers/data'
+import env from 'helpers/env'
 
 export default function () {
-  const {
-    contractAddress: { address },
-  } = useSnapshot(data)
+  const address = env.VITE_SCLEDGER_CONTRACT_ADDRESS
   return (
     <>
       <SubheaderText>Contract address:</SubheaderText>
       <BodyText>
-        <Link url={`https://rinkeby.etherscan.io/address/${address}`}>
+        <Link url={`https://goerli.etherscan.io/address/${address}`}>
           {address}
         </Link>
       </BodyText>
