@@ -22,7 +22,7 @@ export default function ({
   return (
     <div className={container}>
       <BodyText>
-        <Link url={`https://rinkeby.etherscan.io/address/${originalAddress}`}>
+        <Link url={`https://goerli.etherscan.io/address/${originalAddress}`}>
           <ContractName address={originalAddress} />
         </Link>{' '}
         <Suspense fallback={<span> (loading minted count...)</span>}>
@@ -31,7 +31,7 @@ export default function ({
       </BodyText>
       <BodyText>
         Derivative:{' '}
-        <Link url={`https://rinkeby.etherscan.io/address/${derivativeAddress}`}>
+        <Link url={`https://goerli.etherscan.io/address/${derivativeAddress}`}>
           <ContractName address={derivativeAddress} />
         </Link>{' '}
         <Suspense fallback={<span> (loading minted count...)</span>}>
