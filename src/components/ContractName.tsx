@@ -1,10 +1,13 @@
 import { Suspense } from 'react'
 import { useSnapshot } from 'valtio'
-import SealCredStore from 'stores/SealCredStore'
+import ContractNamesStore from 'stores/ContractNamesStore'
 
 function ContractNameOrAddress({ address }: { address: string }) {
-  const { contractNames } = useSnapshot(SealCredStore)
-  return <>{contractNames[address] || address}</>
+  const { contractNames } = useSnapshot(ContractNamesStore)
+  const contractName = contractNames[address]
+  console.log(address, contractName)
+  if (!contractName) ContractNamesStore.fetchContractName(address)
+  return <>{contractName || address}</>
 }
 
 export default function ({ address }: { address: string }) {
