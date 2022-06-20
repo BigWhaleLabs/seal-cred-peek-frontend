@@ -1,19 +1,18 @@
 import { proxy } from 'valtio'
 import Ledger from 'models/Ledger'
 import LedgerRecord from 'models/LedgerRecord'
-import TokenIdToOwnerMap from 'models/TokenIdToOwnerMap'
+import getCountOfOwners from 'helpers/getCountOfOwners'
 import getLedger from 'helpers/getLedger'
 import getLedgerRecord from 'helpers/getLedgerRecord'
-import getMapOfOwners from 'helpers/getTokenIdToOwnerMap'
 import sealCred from 'helpers/sealCred'
 
 interface SealCredStoreType {
   ledger: Promise<Ledger>
-  originalContractsToOwnersMaps: {
-    [contractAddress: string]: Promise<TokenIdToOwnerMap>
+  originalContractsCount: {
+    [contractAddress: string]: Promise<number>
   }
-  derivativeContractsToOwnersMaps: {
-    [contractAddress: string]: Promise<TokenIdToOwnerMap>
+  derivativeContractsCount: {
+    [contractAddress: string]: Promise<number>
   }
   fetchContractsToOwnerMaps: (ledger: Ledger) => void
 }
@@ -27,23 +26,22 @@ const SealCredStore = proxy<SealCredStoreType>({
     console.log('ledger', Object.keys(ledger).length)
     return ledger
   }),
-  originalContractsToOwnersMaps: {},
-  derivativeContractsToOwnersMaps: {},
+  originalContractsCount: {},
+  derivativeContractsCount: {},
   fetchContractsToOwnerMaps(ledger: Ledger) {
     for (const { originalContract, derivativeContract } of Object.values(
       ledger
     )) {
-      SealCredStore.originalContractsToOwnersMaps[originalContract.address] =
-        getMapOfOwners(originalContract)
-      SealCredStore.derivativeContractsToOwnersMaps[
-        derivativeContract.address
-      ] = getMapOfOwners(derivativeContract)
+      SealCredStore.originalContractsCount[originalContract.address] =
+        getCountOfOwners(originalContract)
+      SealCredStore.derivativeContractsCount[derivativeContract.address] =
+        getCountOfOwners(derivativeContract)
     }
-    SealCredStore.originalContractsToOwnersMaps = {
-      ...SealCredStore.originalContractsToOwnersMaps,
+    SealCredStore.originalContractsCount = {
+      ...SealCredStore.originalContractsCount,
     }
-    SealCredStore.derivativeContractsToOwnersMaps = {
-      ...SealCredStore.derivativeContractsToOwnersMaps,
+    SealCredStore.derivativeContractsCount = {
+      ...SealCredStore.derivativeContractsCount,
     }
   },
 })
@@ -54,40 +52,40 @@ function addListenersToLedgerRecord({
 }: LedgerRecord) {
   originalContract.on(
     originalContract.filters.Transfer(),
-    async (_, to, tokenId) => {
-      console.log('Transfer (original)', originalContract.address, to, tokenId)
-      const originalContractToOwnerMap = await SealCredStore
-        .originalContractsToOwnersMaps[originalContract.address]
-
-      const newOriginalContractToOwnerMap = {
-        ...originalContractToOwnerMap,
-        [tokenId.toNumber()]: to,
+    async (from, to, tokenId) => {
+      if (from === '0x0000000000000000000000000000000000000000') {
+        console.log(
+          'Transfer (original)',
+          originalContract.address,
+          to,
+          tokenId
+        )
+        const currentCount =
+          (await SealCredStore.originalContractsCount[
+            originalContract.address
+          ]) ?? 0
+        SealCredStore.originalContractsCount[originalContract.address] =
+          Promise.resolve(currentCount + 1)
       }
-
-      SealCredStore.originalContractsToOwnersMaps[originalContract.address] =
-        Promise.resolve(newOriginalContractToOwnerMap)
     }
   )
   derivativeContract.on(
     derivativeContract.filters.Transfer(),
-    async (_, to, tokenId) => {
-      console.log(
-        'Transfer (derivative)',
-        derivativeContract.address,
-        to,
-        tokenId
-      )
-      const derivativeContractToOwnerMap = await SealCredStore
-        .derivativeContractsToOwnersMaps[derivativeContract.address]
-
-      const newDerivativeContractToOwnerMap = {
-        ...derivativeContractToOwnerMap,
-        [tokenId.toNumber()]: to,
+    async (from, to, tokenId) => {
+      if (from === '0x0000000000000000000000000000000000000000') {
+        console.log(
+          'Transfer (derivative)',
+          derivativeContract.address,
+          to,
+          tokenId
+        )
+        const currentCount =
+          (await SealCredStore.derivativeContractsCount[
+            derivativeContract.address
+          ]) ?? 0
+        SealCredStore.derivativeContractsCount[derivativeContract.address] =
+          Promise.resolve(currentCount + 1)
       }
-
-      SealCredStore.derivativeContractsToOwnersMaps[
-        derivativeContract.address
-      ] = Promise.resolve(newDerivativeContractToOwnerMap)
     }
   )
 }
