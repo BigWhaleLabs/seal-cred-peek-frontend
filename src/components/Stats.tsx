@@ -37,7 +37,7 @@ function useData() {
   const { derivativeCountByBatch, derivativeCount } = useSnapshot(StatsStore)
 
   const mostMinted = Object.entries(derivativeCount)
-    .sort(([keyA, countA], [keyB, countB]) => countB - countA)
+    .sort((leftCount, rightCount) => rightCount[1] - leftCount[1])
     .slice(0, 9)
     .map(([key]) => key)
 

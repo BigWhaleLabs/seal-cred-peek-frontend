@@ -13,7 +13,7 @@ export default function () {
   ) : (
     <>
       {Object.entries(derivativeCount)
-        .sort(([keyA, countA], [keyB, countB]) => countB - countA)
+        .sort((leftCount, rightCount) => rightCount[1] - leftCount[1])
         .map(([contract]) => (
           <Contract
             originalAddress={reverseLedger[contract].originalContract.address}
