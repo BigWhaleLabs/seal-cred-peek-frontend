@@ -20,12 +20,6 @@ export const options = {
   animation: {
     duration: 0,
   },
-  //   plugins: {
-  //     title: {
-  //       display: true,
-  //       text: 'Stats',
-  //     },
-  //   },
   responsive: true,
   scales: {
     x: {
