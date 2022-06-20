@@ -6271,6 +6271,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"chart.js@npm:^3.8.0":
+  version: 3.8.0
+  resolution: "chart.js@npm:3.8.0"
+  checksum: 0360212bf5d534effc8475a1aa705ba7257a315af368b5e8eecf476f0bd57a6bb80ad740e870d552f2d11e134dd1497ccef02950d7e626c21a400ff00ecf59af
+  languageName: node
+  linkType: hard
+
 "check-types@npm:^11.1.1":
   version: 11.1.2
   resolution: "check-types@npm:11.1.2"
@@ -13555,6 +13562,16 @@ __metadata:
   languageName: node
   linkType: hard
 
+"react-chartjs-2@npm:^4.2.0":
+  version: 4.2.0
+  resolution: "react-chartjs-2@npm:4.2.0"
+  peerDependencies:
+    chart.js: ^3.5.0
+    react: ^16.8.0 || ^17.0.0 || ^18.0.0
+  checksum: cd266387d23a32d4590f390075fbecf8570678a9d9fb2d71881072dd557eee88777bf3659c19c07967f813c945aa2b34e44a2e820eaaa89b38035f58e7befcf6
+  languageName: node
+  linkType: hard
+
 "react-dev-utils@npm:^12.0.1":
   version: 12.0.1
   resolution: "react-dev-utils@npm:12.0.1"
@@ -14309,6 +14326,7 @@ __metadata:
     "@vitejs/plugin-react": ^1.3.2
     "@zk-kit/incremental-merkle-tree": ^0.4.3
     autoprefixer: ^10.4.7
+    chart.js: ^3.8.0
     circomlibjs: ^0.1.4
     cross-env: ^7.0.3
     envalid: ^7.3.1
@@ -14325,6 +14343,7 @@ __metadata:
     postcss: ^8.4.14
     preact: ^10.8.1
     prettier: ^2.7.1
+    react-chartjs-2: ^4.2.0
     react-scripts: ^5.0.1
     react-toastify: ^9.0.4
     rollup-plugin-node-polyfills: ^0.2.1

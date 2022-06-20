@@ -5,7 +5,6 @@ import ContractNamesStore from 'stores/ContractNamesStore'
 function ContractNameOrAddress({ address }: { address: string }) {
   const { contractNames } = useSnapshot(ContractNamesStore)
   const contractName = contractNames[address]
-  console.log(address, contractName)
   if (!contractName) ContractNamesStore.fetchContractName(address)
   return <>{contractName || address}</>
 }

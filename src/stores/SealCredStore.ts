@@ -1,50 +1,75 @@
-import { proxy } from 'valtio'
+import { getBatchKey, getCountOfOwners } from 'helpers/getCountOfOwners'
+import { proxyWithComputed } from 'valtio/utils'
 import Ledger from 'models/Ledger'
 import LedgerRecord from 'models/LedgerRecord'
-import getCountOfOwners from 'helpers/getCountOfOwners'
+import defaultProvider from 'helpers/defaultProvider'
 import getLedger from 'helpers/getLedger'
 import getLedgerRecord from 'helpers/getLedgerRecord'
 import sealCred from 'helpers/sealCred'
 
 interface SealCredStoreType {
   ledger: Promise<Ledger>
+  blockNumber: number
   originalContractsCount: {
-    [contractAddress: string]: Promise<number>
+    [contractAddress: string]: Promise<{ [batchNumber: string]: number }>
   }
   derivativeContractsCount: {
-    [contractAddress: string]: Promise<number>
+    [contractAddress: string]: Promise<{ [batchNumber: string]: number }>
   }
   fetchContractsToOwnerMaps: (ledger: Ledger) => void
 }
 
-const SealCredStore = proxy<SealCredStoreType>({
-  ledger: getLedger(sealCred).then((ledger) => {
-    SealCredStore.fetchContractsToOwnerMaps(ledger)
-    for (const record of Object.values(ledger)) {
-      addListenersToLedgerRecord(record)
-    }
-    console.log('ledger', Object.keys(ledger).length)
-    return ledger
-  }),
-  originalContractsCount: {},
-  derivativeContractsCount: {},
-  fetchContractsToOwnerMaps(ledger: Ledger) {
-    for (const { originalContract, derivativeContract } of Object.values(
-      ledger
-    )) {
-      SealCredStore.originalContractsCount[originalContract.address] =
-        getCountOfOwners(originalContract)
-      SealCredStore.derivativeContractsCount[derivativeContract.address] =
-        getCountOfOwners(derivativeContract)
-    }
-    SealCredStore.originalContractsCount = {
-      ...SealCredStore.originalContractsCount,
-    }
-    SealCredStore.derivativeContractsCount = {
-      ...SealCredStore.derivativeContractsCount,
-    }
+interface SealCredStoreTypeComputed {
+  reverseLedger: Ledger
+}
+
+const SealCredStore = proxyWithComputed<
+  SealCredStoreType,
+  SealCredStoreTypeComputed
+>(
+  {
+    blockNumber: 0,
+    ledger: getLedger(sealCred).then((ledger) => {
+      SealCredStore.fetchContractsToOwnerMaps(ledger)
+      for (const record of Object.values(ledger)) {
+        addListenersToLedgerRecord(record)
+      }
+      console.log('ledger', Object.keys(ledger).length)
+      return ledger
+    }),
+    originalContractsCount: {},
+    derivativeContractsCount: {},
+    fetchContractsToOwnerMaps(ledger: Ledger) {
+      for (const { originalContract, derivativeContract } of Object.values(
+        ledger
+      )) {
+        SealCredStore.originalContractsCount[originalContract.address] =
+          getCountOfOwners(originalContract)
+        SealCredStore.derivativeContractsCount[derivativeContract.address] =
+          getCountOfOwners(derivativeContract)
+      }
+      SealCredStore.originalContractsCount = {
+        ...SealCredStore.originalContractsCount,
+      }
+      SealCredStore.derivativeContractsCount = {
+        ...SealCredStore.derivativeContractsCount,
+      }
+    },
   },
-})
+  {
+    reverseLedger: (state) =>
+      Object.values(state.ledger).reduce(
+        (prev, { originalContract, derivativeContract }) => ({
+          ...prev,
+          [derivativeContract.address]: {
+            originalContract,
+            derivativeContract,
+          },
+        }),
+        {}
+      ),
+  }
+)
 
 function addListenersToLedgerRecord({
   originalContract,
@@ -52,7 +77,7 @@ function addListenersToLedgerRecord({
 }: LedgerRecord) {
   originalContract.on(
     originalContract.filters.Transfer(),
-    async (from, to, tokenId) => {
+    async (from, to, tokenId, { blockNumber }) => {
       if (from === '0x0000000000000000000000000000000000000000') {
         console.log(
           'Transfer (original)',
@@ -63,15 +88,19 @@ function addListenersToLedgerRecord({
         const currentCount =
           (await SealCredStore.originalContractsCount[
             originalContract.address
-          ]) ?? 0
+          ]) || {}
         SealCredStore.originalContractsCount[originalContract.address] =
-          Promise.resolve(currentCount + 1)
+          Promise.resolve({
+            ...currentCount,
+            [getBatchKey(blockNumber)]:
+              (currentCount[getBatchKey(blockNumber)] ?? 0) + 1,
+          })
       }
     }
   )
   derivativeContract.on(
     derivativeContract.filters.Transfer(),
-    async (from, to, tokenId) => {
+    async (from, to, tokenId, { blockNumber }) => {
       if (from === '0x0000000000000000000000000000000000000000') {
         console.log(
           'Transfer (derivative)',
@@ -82,13 +111,22 @@ function addListenersToLedgerRecord({
         const currentCount =
           (await SealCredStore.derivativeContractsCount[
             derivativeContract.address
-          ]) ?? 0
+          ]) || {}
         SealCredStore.derivativeContractsCount[derivativeContract.address] =
-          Promise.resolve(currentCount + 1)
+          Promise.resolve({
+            ...currentCount,
+            [getBatchKey(blockNumber)]:
+              (currentCount[getBatchKey(blockNumber)] ?? 0) + 1,
+          })
       }
     }
   )
 }
+
+defaultProvider.on(
+  'block',
+  (blockNumber) => (SealCredStore.blockNumber = blockNumber)
+)
 
 sealCred.on(
   sealCred.filters.CreateDerivativeContract(),
