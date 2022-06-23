@@ -2,41 +2,41 @@ import { derive } from 'valtio/utils'
 import SealCredStore from 'stores/SealCredStore'
 
 export default derive({
-  originalCount: async (get) => {
-    const state = get(SealCredStore)
+  originalCount: (get) => {
+    const originalContractsCount = get(SealCredStore).originalContractsCount
     const original: { [address: string]: number } = {}
-    for (const address in state.originalContractsCount) {
+    for (const address in originalContractsCount) {
       original[address] = Object.values(
-        (await state.originalContractsCount[address]) ?? {}
+        originalContractsCount[address] ?? {}
       ).reduce((total, value) => total + value, 0)
     }
     return original
   },
-  derivativeCount: async (get) => {
-    const state = get(SealCredStore)
+  derivativeCount: (get) => {
+    const derivativeContractsCount = get(SealCredStore).derivativeContractsCount
     const derivative: { [address: string]: number } = {}
-    for (const address in state.derivativeContractsCount) {
+    for (const address in derivativeContractsCount) {
       derivative[address] = Object.values(
-        (await state.derivativeContractsCount[address]) ?? {}
+        derivativeContractsCount[address] ?? {}
       ).reduce((total, value) => total + value, 0)
     }
     return derivative
   },
-  originalCountByBatch: async (get) => {
-    const state = get(SealCredStore)
+  originalCountByBatch: (get) => {
+    const originalContractsCount = get(SealCredStore).originalContractsCount
     const original: { [address: string]: { [batchNumber: string]: number } } =
       {}
-    for (const address in state.originalContractsCount) {
-      original[address] = await state.originalContractsCount[address]
+    for (const address in originalContractsCount) {
+      original[address] = originalContractsCount[address]
     }
     return original
   },
-  derivativeCountByBatch: async (get) => {
-    const state = get(SealCredStore)
+  derivativeCountByBatch: (get) => {
+    const derivativeContractsCount = get(SealCredStore).derivativeContractsCount
     const derivative: { [address: string]: { [batchNumber: string]: number } } =
       {}
-    for (const address in state.derivativeContractsCount) {
-      derivative[address] = await state.derivativeContractsCount[address]
+    for (const address in derivativeContractsCount) {
+      derivative[address] = derivativeContractsCount[address]
     }
     return derivative
   },

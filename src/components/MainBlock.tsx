@@ -10,15 +10,16 @@ export default function () {
     <>
       <HeaderText>SealCred admin panel</HeaderText>
       <ContractAddress />
+      <SubheaderText>Chart:</SubheaderText>
       <SuspenseWithError error="Error fetching stats!">
         <Stats />
       </SuspenseWithError>
+      <SubheaderText>Total minted:</SubheaderText>
+      <MintedCount />
       <SubheaderText>Ledger:</SubheaderText>
       <SuspenseWithError error="Error fetching ledger!">
         <Ledger />
       </SuspenseWithError>
-      <SubheaderText>Total minted:</SubheaderText>
-      <MintedCount />
     </>
   )
 }

@@ -3,6 +3,7 @@ import { Suspense } from 'react'
 import { margin } from 'classnames/tailwind'
 import { useSnapshot } from 'valtio'
 import ContractName from 'components/ContractName'
+import SealCredStore from 'stores/SealCredStore'
 import StatsStore from 'stores/StatsStore'
 
 function MintedCount({ address }: { address: string }) {
@@ -25,9 +26,11 @@ export default function ({
         <Link url={`https://goerli.etherscan.io/address/${originalAddress}`}>
           <ContractName address={originalAddress} />
         </Link>{' '}
-        <Suspense fallback={<span> (loading minted count...)</span>}>
-          <MintedCount address={originalAddress} />
-        </Suspense>
+        {SealCredStore.specialContracts.includes(originalAddress) && (
+          <Suspense fallback={<span> (loading minted count...)</span>}>
+            <MintedCount address={originalAddress} />
+          </Suspense>
+        )}
       </BodyText>
       <BodyText>
         Derivative:{' '}

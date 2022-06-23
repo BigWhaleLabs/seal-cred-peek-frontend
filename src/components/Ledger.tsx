@@ -8,7 +8,7 @@ export default function () {
   const { derivativeCount } = useSnapshot(StatsStore)
   const { reverseLedger } = useSnapshot(SealCredStore)
 
-  return !Object.keys(derivativeCount).length ? (
+  return !reverseLedger || !Object.keys(derivativeCount).length ? (
     <BodyText>No contracts added yet</BodyText>
   ) : (
     <>
@@ -16,7 +16,11 @@ export default function () {
         .sort((leftCount, rightCount) => rightCount[1] - leftCount[1])
         .map(([contract]) => (
           <Contract
-            originalAddress={reverseLedger[contract].originalContract.address}
+            originalAddress={
+              reverseLedger &&
+              reverseLedger[contract] &&
+              reverseLedger[contract].originalContract.address
+            }
             derivativeAddress={contract}
             key={contract}
           />
