@@ -1,12 +1,12 @@
 import {
   ERC721__factory,
   SCERC721Derivative__factory,
-  SealCredLedger,
+  SealCredERC721Ledger,
 } from '@big-whale-labs/seal-cred-ledger-contract'
 import defaultProvider from 'helpers/defaultProvider'
 
 export default async function (
-  sealCredLedger: SealCredLedger,
+  sealCredLedger: SealCredERC721Ledger,
   originalContract: string
 ) {
   return {

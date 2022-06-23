@@ -1,6 +1,6 @@
-# SealCred admin frontend
+# SealCred peek frontend
 
-Website that shows the current state of the SealCredLedger contract and allows to add new contracts to it.
+Website that shows the current state of the SealCredERC721Ledger contract.
 
 ## Local launch
 
