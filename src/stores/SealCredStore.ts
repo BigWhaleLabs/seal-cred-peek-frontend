@@ -45,9 +45,7 @@ const SealCredStore = proxyWithComputed<
         ledger
       )) {
         await ContractNamesStore.fetchContractName(originalContract.address)
-        SealCredStore.originalContractsCount[originalContract.address] = {}
         await ContractNamesStore.fetchContractName(derivativeContract.address)
-        SealCredStore.derivativeContractsCount[derivativeContract.address] = {}
       }
       SealCredStore.blockNumber = await defaultProvider.getBlockNumber()
       SealCredStore.fetchContractsToOwnerMaps(ledger)
@@ -63,20 +61,12 @@ const SealCredStore = proxyWithComputed<
           if (
             SealCredStore.specialContracts.includes(originalContract.address)
           ) {
-            console.log(
-              'Load original',
-              ContractNamesStore.contractNames[originalContract.address]
-            )
             SealCredStore.originalContractsCount[originalContract.address] =
               await getCountOfOwners(
                 originalContract,
                 SealCredStore.blockNumber
               )
           }
-          console.log(
-            'Load derivative',
-            ContractNamesStore.contractNames[derivativeContract.address]
-          )
           SealCredStore.derivativeContractsCount[derivativeContract.address] =
             await getCountOfOwners(
               derivativeContract,

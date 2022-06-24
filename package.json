@@ -36,6 +36,7 @@
     "react-chartjs-2": "^4.2.0",
     "react-toastify": "^9.0.4",
     "rollup-plugin-node-polyfills": "^0.2.1",
+    "secure-ls": "^1.2.6",
     "valtio": "^1.6.1"
   },
   "devDependencies": {

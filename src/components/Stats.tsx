@@ -11,6 +11,7 @@ import {
 import { latestBlockKeys } from 'helpers/getCountOfOwners'
 import { useSnapshot } from 'valtio'
 import ContractNamesStore from 'stores/ContractNamesStore'
+import Loading from 'components/Loading'
 import SealCredStore from 'stores/SealCredStore'
 import StatsStore from 'stores/StatsStore'
 
@@ -33,8 +34,13 @@ export const options = {
 
 function useData() {
   const { contractNames } = useSnapshot(ContractNamesStore)
-  const { blockNumber } = useSnapshot(SealCredStore)
+  const { blockNumber, ledger } = useSnapshot(SealCredStore)
   const { derivativeCountByBatch, derivativeCount } = useSnapshot(StatsStore)
+
+  const loadedContracts = Object.keys(derivativeCount).length
+  const totalCount = Object.keys(ledger).length
+
+  if (loadedContracts < totalCount) return null
 
   const mostMinted = Object.entries(derivativeCount)
     .sort((leftCount, rightCount) => rightCount[1] - leftCount[1])
@@ -72,5 +78,6 @@ function useData() {
 
 export default function Stats() {
   const data = useData()
+  if (!data) return <Loading />
   return <Bar options={options} data={data} />
 }

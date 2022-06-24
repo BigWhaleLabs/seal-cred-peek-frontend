@@ -9,9 +9,16 @@ function MintedCount() {
   const { ledger } = useSnapshot(SealCredStore)
   const { originalCount, derivativeCount } = useSnapshot(StatsStore)
 
+  const loadedContracts = Object.keys(derivativeCount).length
+  const totalCount = Object.keys(ledger).length
+
   return (
     <>
-      <BodyText>Total contracts: {Object.keys(ledger).length}</BodyText>
+      <BodyText>
+        {loadedContracts !== totalCount
+          ? `Loading contracts: ${loadedContracts} / ${totalCount}`
+          : `Total contracts: ${totalCount}`}
+      </BodyText>
       <BodyText>
         Total minted original:{' '}
         {Object.values(originalCount).reduce((sum, count) => sum + count, 0)}
