@@ -54,12 +54,16 @@ function useData() {
     '#7821b1',
   ]
 
+  const names = {
+    ...contractNames,
+  }
+
   return {
     labels: blockIds,
     datasets: Object.entries(derivativeCountByBatch)
       .filter(([key]) => mostMinted.includes(key))
       .map(([address, block], index) => ({
-        label: contractNames[address] || address,
+        label: names[address] || address,
         data: blockIds.map((blockId) => block[blockId]),
         backgroundColor: backgroundColors[index],
       })),
