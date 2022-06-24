@@ -8,7 +8,7 @@ import SuspenseWithError from 'components/SuspenseWithError'
 export default function () {
   return (
     <>
-      <HeaderText>SealCred admin panel</HeaderText>
+      <HeaderText>SealCredERC721 state</HeaderText>
       <ContractAddress />
       <SubheaderText>Chart:</SubheaderText>
       <SuspenseWithError error="Error fetching stats!">
