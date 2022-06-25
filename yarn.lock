@@ -5849,6 +5849,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"chart.js@npm:^3.8.0":
+  version: 3.8.0
+  resolution: "chart.js@npm:3.8.0"
+  checksum: 0360212bf5d534effc8475a1aa705ba7257a315af368b5e8eecf476f0bd57a6bb80ad740e870d552f2d11e134dd1497ccef02950d7e626c21a400ff00ecf59af
+  languageName: node
+  linkType: hard
+
 "check-types@npm:^11.1.1":
   version: 11.1.2
   resolution: "check-types@npm:11.1.2"
@@ -6309,6 +6316,13 @@ __metadata:
     shebang-command: ^2.0.0
     which: ^2.0.1
   checksum: 671cc7c7288c3a8406f3c69a3ae2fc85555c04169e9d611def9a675635472614f1c0ed0ef80955d5b6d4e724f6ced67f0ad1bb006c2ea643488fcfef994d7f52
+  languageName: node
+  linkType: hard
+
+"crypto-js@npm:^3.1.6":
+  version: 3.3.0
+  resolution: "crypto-js@npm:3.3.0"
+  checksum: 193923143a4784b2f974366068d96fe8280168fd3fef2bfea9551a5c3e32096f5a8fa49ff4eeb5bd0b9716d325618d38cfbe6125e359a4ef488fbca93e600824
   languageName: node
   linkType: hard
 
@@ -10785,6 +10799,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"lz-string@npm:^1.4.4":
+  version: 1.4.4
+  resolution: "lz-string@npm:1.4.4"
+  bin:
+    lz-string: bin/bin.js
+  checksum: 54e31238a61a84d8f664d9860a9fba7310c5b97a52c444f80543069bc084815eff40b8d4474ae1d93992fdf6c252dca37cf27f6adbeb4dbc3df2f3ac773d0e61
+  languageName: node
+  linkType: hard
+
 "magic-string@npm:^0.25.0, magic-string@npm:^0.25.7":
   version: 0.25.7
   resolution: "magic-string@npm:0.25.7"
@@ -13037,6 +13060,16 @@ __metadata:
   languageName: node
   linkType: hard
 
+"react-chartjs-2@npm:^4.2.0":
+  version: 4.2.0
+  resolution: "react-chartjs-2@npm:4.2.0"
+  peerDependencies:
+    chart.js: ^3.5.0
+    react: ^16.8.0 || ^17.0.0 || ^18.0.0
+  checksum: cd266387d23a32d4590f390075fbecf8570678a9d9fb2d71881072dd557eee88777bf3659c19c07967f813c945aa2b34e44a2e820eaaa89b38035f58e7befcf6
+  languageName: node
+  linkType: hard
+
 "react-dev-utils@npm:^12.0.1":
   version: 12.0.1
   resolution: "react-dev-utils@npm:12.0.1"
@@ -13736,9 +13769,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"seal-cred-admin-frontend@workspace:.":
+"seal-cred-peek-frontend@workspace:.":
   version: 0.0.0-use.local
-  resolution: "seal-cred-admin-frontend@workspace:."
+  resolution: "seal-cred-peek-frontend@workspace:."
   dependencies:
     "@big-whale-labs/constants": ^0.0.18
     "@big-whale-labs/seal-cred-ledger-contract": ^0.0.6
@@ -13749,6 +13782,7 @@ __metadata:
     "@vitejs/plugin-react": ^1.3.2
     "@zk-kit/incremental-merkle-tree": ^0.4.3
     autoprefixer: ^10.4.7
+    chart.js: ^3.8.0
     cross-env: ^7.0.3
     envalid: ^7.3.1
     eslint: ^8.18.0
@@ -13764,8 +13798,10 @@ __metadata:
     postcss: ^8.4.14
     preact: ^10.8.2
     prettier: ^2.7.1
+    react-chartjs-2: ^4.2.0
     react-scripts: ^5.0.1
     rollup-plugin-visualizer: ^5.6.0
+    secure-ls: ^1.2.6
     tailwindcss: ^3.1.4
     tailwindcss-classnames: ^3.0.5
     typescript: ^4.7.4
@@ -13774,6 +13810,16 @@ __metadata:
     vite-tsconfig-paths: ^3.5.0
   languageName: unknown
   linkType: soft
+
+"secure-ls@npm:^1.2.6":
+  version: 1.2.6
+  resolution: "secure-ls@npm:1.2.6"
+  dependencies:
+    crypto-js: ^3.1.6
+    lz-string: ^1.4.4
+  checksum: a931fd5e80024fa5f8eb2224f6f98b057f696645587d9a6592502a59e5eb1ca9864375e612739b82cb7f48132e1a5236641dcebf3dad2632922e6a54df5cead6
+  languageName: node
+  linkType: hard
 
 "select-hose@npm:^2.0.0":
   version: 2.0.0
