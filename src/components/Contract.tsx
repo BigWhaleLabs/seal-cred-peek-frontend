@@ -17,14 +17,22 @@ const container = margin('mb-1')
 export default function ({
   originalAddress,
   derivativeAddress,
+  email,
 }: {
   originalAddress: string
   derivativeAddress: string
+  email?: boolean
 }) {
   return (
     <div className={container}>
       <BodyText>
-        <Link url={`https://goerli.etherscan.io/address/${originalAddress}`}>
+        <Link
+          url={
+            email
+              ? `https://${originalAddress}`
+              : `https://goerli.etherscan.io/address/${originalAddress}`
+          }
+        >
           <ContractName address={originalAddress} />
         </Link>{' '}
       </BodyText>

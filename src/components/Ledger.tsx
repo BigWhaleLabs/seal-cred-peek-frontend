@@ -33,6 +33,7 @@ export default function () {
         Object.keys(reverseSCEmailLedger).length ? (
           Object.keys(reverseSCEmailLedger).map((contract) => (
             <Contract
+              email
               originalAddress={
                 reverseSCEmailLedger[contract]?.originalContract.address
               }
