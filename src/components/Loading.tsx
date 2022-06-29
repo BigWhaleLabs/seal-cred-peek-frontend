@@ -1,9 +1,12 @@
 import { BodyText } from 'components/Text'
+import { margin } from 'classnames/tailwind'
 
-export default function () {
+const container = margin('my-2')
+
+export default function ({ text }: { text?: string }) {
   return (
-    <>
-      <BodyText>Loading...</BodyText>
-    </>
+    <div className={container}>
+      <BodyText>{text || 'Loading ledger...'}</BodyText>
+    </div>
   )
 }

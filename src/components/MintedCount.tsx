@@ -3,37 +3,27 @@ import { Suspense } from 'react'
 import { useSnapshot } from 'valtio'
 import Loading from 'components/Loading'
 import SealCredStore from 'stores/SealCredStore'
-import StatsStore from 'stores/StatsStore'
 
 function MintedCount() {
-  const { ledger } = useSnapshot(SealCredStore)
-  const { originalCount, derivativeCount } = useSnapshot(StatsStore)
-
-  const loadedContracts = Object.keys(derivativeCount).length
-  const totalCount = Object.keys(ledger).length
+  const { contractsToCount } = useSnapshot(SealCredStore)
+  const totalCount = Object.values(contractsToCount).reduce(
+    (acc, count) => acc + count.toNumber(),
+    0
+  )
 
   return (
     <>
       <BodyText>
-        {loadedContracts !== totalCount
-          ? `Loading contracts: ${loadedContracts} / ${totalCount}`
-          : `Total contracts: ${totalCount}`}
+        Total contracts: {Object.keys(contractsToCount).length}
       </BodyText>
-      <BodyText>
-        Total minted original:{' '}
-        {Object.values(originalCount).reduce((sum, count) => sum + count, 0)}
-      </BodyText>
-      <BodyText>
-        Total minted derivative:{' '}
-        {Object.values(derivativeCount).reduce((sum, count) => sum + count, 0)}
-      </BodyText>
+      <BodyText>Total minted derivatives: {totalCount}</BodyText>
     </>
   )
 }
 
 export default function () {
   return (
-    <Suspense fallback={<Loading />}>
+    <Suspense fallback={<Loading text="Loading count..." />}>
       <MintedCount />
     </Suspense>
   )

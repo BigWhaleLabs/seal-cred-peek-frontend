@@ -1,30 +1,51 @@
-import { BodyText } from 'components/Text'
+import { BodyText, SubheaderText } from 'components/Text'
 import { useSnapshot } from 'valtio'
 import Contract from 'components/Contract'
+import Loading from 'components/Loading'
 import SealCredStore from 'stores/SealCredStore'
-import StatsStore from 'stores/StatsStore'
 
 export default function () {
-  const { derivativeCount } = useSnapshot(StatsStore)
-  const { reverseLedger } = useSnapshot(SealCredStore)
+  const { reverseSCERC721Ledger } = useSnapshot(SealCredStore)
+  const { reverseSCEmailLedger } = useSnapshot(SealCredStore)
 
-  return !reverseLedger || !Object.keys(derivativeCount).length ? (
-    <BodyText>No contracts added yet</BodyText>
-  ) : (
+  return (
     <>
-      {Object.entries(derivativeCount)
-        .sort((leftCount, rightCount) => rightCount[1] - leftCount[1])
-        .map(([contract]) => (
-          <Contract
-            originalAddress={
-              reverseLedger &&
-              reverseLedger[contract] &&
-              reverseLedger[contract].originalContract.address
-            }
-            derivativeAddress={contract}
-            key={contract}
-          />
-        ))}
+      <SubheaderText>ERC721 Ledger:</SubheaderText>
+      {reverseSCERC721Ledger ? (
+        Object.keys(reverseSCERC721Ledger).length ? (
+          Object.keys(reverseSCERC721Ledger).map((contract) => (
+            <Contract
+              originalAddress={
+                reverseSCERC721Ledger[contract]?.originalContract.address
+              }
+              derivativeAddress={contract}
+              key={contract}
+            />
+          ))
+        ) : (
+          <BodyText>No contracts added yet</BodyText>
+        )
+      ) : (
+        <Loading />
+      )}
+      <SubheaderText>Email Ledger:</SubheaderText>
+      {reverseSCEmailLedger ? (
+        Object.keys(reverseSCEmailLedger).length ? (
+          Object.keys(reverseSCEmailLedger).map((contract) => (
+            <Contract
+              originalAddress={
+                reverseSCEmailLedger[contract]?.originalContract.address
+              }
+              derivativeAddress={contract}
+              key={contract}
+            />
+          ))
+        ) : (
+          <BodyText>No contracts added yet</BodyText>
+        )
+      ) : (
+        <Loading />
+      )}
     </>
   )
 }

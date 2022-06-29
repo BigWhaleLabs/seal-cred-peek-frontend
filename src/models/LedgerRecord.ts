@@ -1,9 +1,15 @@
 import {
   ERC721,
   SCERC721Derivative,
+  SCEmailDerivative,
 } from '@big-whale-labs/seal-cred-ledger-contract'
 
-export default interface LedgerRecord {
+export interface SCERC721LedgerRecord {
   originalContract: ERC721
   derivativeContract: SCERC721Derivative
+}
+
+export interface SCEmailLedgerRecord {
+  originalContract: ERC721
+  derivativeContract: SCEmailDerivative
 }
