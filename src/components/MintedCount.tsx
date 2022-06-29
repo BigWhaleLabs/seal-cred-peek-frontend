@@ -4,6 +4,20 @@ import { useSnapshot } from 'valtio'
 import Loading from 'components/Loading'
 import SealCredStore from 'stores/SealCredStore'
 
+function ContractCount() {
+  const { reverseSCERC721Ledger } = useSnapshot(SealCredStore)
+  const { reverseSCEmailLedger } = useSnapshot(SealCredStore)
+  return (
+    <>
+      <BodyText>
+        Total contracts:{' '}
+        {Object.keys(reverseSCERC721Ledger || {}).length +
+          Object.keys(reverseSCEmailLedger || {}).length}
+      </BodyText>
+    </>
+  )
+}
+
 function MintedCount() {
   const { reverseSCERC721Ledger } = useSnapshot(SealCredStore)
   const { reverseSCEmailLedger } = useSnapshot(SealCredStore)
@@ -13,13 +27,11 @@ function MintedCount() {
     ...Object.keys(reverseSCERC721Ledger || {}),
     ...Object.keys(reverseSCEmailLedger || {}),
   ]) {
+    console.log(contract, contractsToCount[contract]?.toNumber() || 0)
     totalCount += contractsToCount[contract]?.toNumber() || 0
   }
   return (
     <>
-      <BodyText>
-        Total contracts: {Object.keys(contractsToCount).length}
-      </BodyText>
       <BodyText>Total minted derivatives: {totalCount}</BodyText>
     </>
   )
@@ -27,8 +39,13 @@ function MintedCount() {
 
 export default function () {
   return (
-    <Suspense fallback={<Loading text="Loading count..." />}>
-      <MintedCount />
-    </Suspense>
+    <div>
+      <Suspense fallback={<Loading text="Loading contract count..." />}>
+        <ContractCount />
+      </Suspense>
+      <Suspense fallback={<Loading text="Loading count..." />}>
+        <MintedCount />
+      </Suspense>
+    </div>
   )
 }
