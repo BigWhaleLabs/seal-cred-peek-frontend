@@ -17,9 +17,10 @@ Website that shows the current state of the SealCredERC721Ledger contract.
 
 ## Environment variables
 
-| Variable                         | Description                                                         |
-| -------------------------------- | ------------------------------------------------------------------- |
-| `VITE_ENCRYPT_KEY`               | Secret key to encrypt local storage                                 |
-| `VITE_ETH_NETWORK`               | Ethereum network to use (defaults to @bwl/constants)                |
-| `VITE_ETH_RPC`                   | Ethereum node RPC URI (defaults to @bwl/constants)                  |
-| `VITE_SCLEDGER_CONTRACT_ADDRESS` | Address of the SealCredLedger contract (defaults to @bwl/constants) |
+| Variable                            | Description                                                         |
+| ----------------------------------- | ------------------------------------------------------------------- |
+| `VITE_ETH_NETWORK`                  | Ethereum network to use (defaults to @bwl/constants)                |
+| `VITE_ETH_RPC`                      | Ethereum node RPC URI (defaults to @bwl/constants)                  |
+| `SC_EMAIL_LEDGER_CONTRACT_ADDRESS`  | Address of the SCEmailLedger contract (defaults to @bwl/constants)  |
+| `SC_ERC721_LEDGER_CONTRACT_ADDRESS` | Address of the SCERC721Ledger contract (defaults to @bwl/constants) |
+| `VITE_ENCRYPT_KEY`                  | Secret key to encrypt local storage                                 |
