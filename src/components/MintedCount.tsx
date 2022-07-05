@@ -3,6 +3,8 @@ import { Suspense } from 'react'
 import { useSnapshot } from 'valtio'
 import Loading from 'components/Loading'
 import SealCredStore from 'stores/SealCredStore'
+import formatNumber from 'helpers/formatNumber'
+import mintedBefore from 'helpers/mintedBefore'
 
 function ContractCount() {
   const { reverseSCERC721Ledger } = useSnapshot(SealCredStore)
@@ -32,7 +34,11 @@ function MintedCount() {
   }
   return (
     <>
-      <BodyText>Total minted derivatives: {totalCount}</BodyText>
+      <BodyText>Total minted derivatives: {formatNumber(totalCount)}</BodyText>
+      <BodyText>
+        Total minted derivatives (all time and all versions):{' '}
+        {formatNumber(totalCount + mintedBefore)}
+      </BodyText>
     </>
   )
 }
