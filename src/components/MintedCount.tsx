@@ -1,4 +1,4 @@
-import { BodyText } from 'components/Text'
+import { BodyText, SubheaderText } from 'components/Text'
 import { Suspense } from 'react'
 import { useSnapshot } from 'valtio'
 import Loading from 'components/Loading'
@@ -24,19 +24,25 @@ function MintedCount() {
   const { reverseSCERC721Ledger } = useSnapshot(SealCredStore)
   const { reverseSCEmailLedger } = useSnapshot(SealCredStore)
   const { contractsToCount } = useSnapshot(SealCredStore)
-  let totalCount = 0
-  for (const contract of [
-    ...Object.keys(reverseSCERC721Ledger || {}),
-    ...Object.keys(reverseSCEmailLedger || {}),
-  ]) {
-    console.log(contract, contractsToCount[contract]?.toNumber() || 0)
-    totalCount += contractsToCount[contract]?.toNumber() || 0
+  let erc721Count = 0
+  for (const contract of [...Object.keys(reverseSCERC721Ledger || {})]) {
+    erc721Count += contractsToCount[contract]?.toNumber() || 0
   }
-  return (
+  let emailCount = 0
+  for (const contract of [...Object.keys(reverseSCEmailLedger || {})]) {
+    emailCount += contractsToCount[contract]?.toNumber() || 0
+  }
+  const totalCount = erc721Count + emailCount
+  return totalCount === 0 ? (
+    <Loading text="Loading count..." />
+  ) : (
     <>
-      <BodyText>Total minted derivatives: {formatNumber(totalCount)}</BodyText>
+      <BodyText>Total: {formatNumber(totalCount)}</BodyText>
+      <BodyText>Total ERC721: {formatNumber(erc721Count)}</BodyText>
+      <BodyText>Total email: {formatNumber(emailCount)}</BodyText>
+      <BodyText>Total previous versions: {formatNumber(mintedBefore)}</BodyText>
       <BodyText>
-        Total minted derivatives (all time and all versions):{' '}
+        Total all time and all versions:{' '}
         {formatNumber(totalCount + mintedBefore)}
       </BodyText>
     </>

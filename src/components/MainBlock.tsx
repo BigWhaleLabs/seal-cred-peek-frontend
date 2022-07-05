@@ -11,7 +11,7 @@ export default function () {
     <>
       <HeaderText>SealCred state</HeaderText>
       <ContractAddress />
-      <SubheaderText>Total minted:</SubheaderText>
+      <SubheaderText>Total minted derivatives:</SubheaderText>
       <MintedCount />
       <SuspenseWithError error="Error fetching ledger!">
         <Ledger />
