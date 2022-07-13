@@ -1,16 +1,15 @@
 import { BodyText, SubheaderText } from 'components/Text'
-import { useSnapshot } from 'valtio'
 import Contract from 'components/Contract'
 import Loading from 'components/Loading'
 import Network from 'models/Network'
-import SealCredStore from 'stores/SealCredStore'
+import useReversedLedger from 'helpers/useReversedLedger'
 
 export default function () {
   const {
     reverseSCERC721Ledger,
     reverseExternalSCERC721Ledger,
     reverseSCEmailLedger,
-  } = useSnapshot(SealCredStore)
+  } = useReversedLedger()
 
   return (
     <>

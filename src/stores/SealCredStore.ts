@@ -15,7 +15,7 @@ import {
   getERC721LedgerRecord,
   getEmailLedgerRecord,
 } from 'helpers/getLedgerRecord'
-import { proxyWithComputed } from 'valtio/utils'
+import { proxy } from 'valtio'
 import getContractCount from 'helpers/getContractCount'
 
 interface SealCredStoreType {
@@ -25,81 +25,35 @@ interface SealCredStoreType {
   contractsToCount: { [contract: string]: Promise<BigNumber> }
 }
 
-interface SealCredStoreTypeComputed {
-  reverseExternalSCERC721Ledger: SCERC721LedgerModel
-  reverseSCERC721Ledger: SCERC721LedgerModel
-  reverseSCEmailLedger: SCEmailLedgerModel
-}
-
-const SealCredStore = proxyWithComputed<
-  SealCredStoreType,
-  SealCredStoreTypeComputed
->(
-  {
-    externalSCERC721Ledger: getExternalERC721Ledger(
-      externalSCERC721Ledger
-    ).then((ledger) => {
+const SealCredStore = proxy<SealCredStoreType>({
+  externalSCERC721Ledger: getExternalERC721Ledger(externalSCERC721Ledger).then(
+    (ledger) => {
       Object.values(ledger).forEach((record) => {
         SealCredStore.contractsToCount[record.derivativeContract.address] =
           getContractCount(record.derivativeContract)
         addListenersToERC721LedgerRecord(record)
       })
       return ledger
-    }),
-    sCERC721Ledger: getERC721Ledger(sCERC721Ledger).then((ledger) => {
-      Object.values(ledger).forEach((record) => {
-        SealCredStore.contractsToCount[record.derivativeContract.address] =
-          getContractCount(record.derivativeContract)
-        addListenersToERC721LedgerRecord(record)
-      })
-      return ledger
-    }),
-    sCEmailLedger: getEmailLedger(sCEmailLedger).then((ledger) => {
-      Object.values(ledger).forEach((record) => {
-        SealCredStore.contractsToCount[record.derivativeContract.address] =
-          getContractCount(record.derivativeContract)
-        addListenersToEmailLedgerRecord(record)
-      })
-      return ledger
-    }),
-    contractsToCount: {},
-  },
-  {
-    reverseExternalSCERC721Ledger: (state) =>
-      Object.values(state.externalSCERC721Ledger).reduce(
-        (prev, { originalContract, derivativeContract }) => ({
-          ...prev,
-          [derivativeContract.address]: {
-            originalContract,
-            derivativeContract,
-          },
-        }),
-        {}
-      ),
-    reverseSCERC721Ledger: (state) =>
-      Object.values(state.sCERC721Ledger).reduce(
-        (prev, { originalContract, derivativeContract }) => ({
-          ...prev,
-          [derivativeContract.address]: {
-            originalContract,
-            derivativeContract,
-          },
-        }),
-        {}
-      ),
-    reverseSCEmailLedger: (state) =>
-      Object.values(state.sCEmailLedger).reduce(
-        (prev, { originalContract, derivativeContract }) => ({
-          ...prev,
-          [derivativeContract.address]: {
-            originalContract,
-            derivativeContract,
-          },
-        }),
-        {}
-      ),
-  }
-)
+    }
+  ),
+  sCERC721Ledger: getERC721Ledger(sCERC721Ledger).then((ledger) => {
+    Object.values(ledger).forEach((record) => {
+      SealCredStore.contractsToCount[record.derivativeContract.address] =
+        getContractCount(record.derivativeContract)
+      addListenersToERC721LedgerRecord(record)
+    })
+    return ledger
+  }),
+  sCEmailLedger: getEmailLedger(sCEmailLedger).then((ledger) => {
+    Object.values(ledger).forEach((record) => {
+      SealCredStore.contractsToCount[record.derivativeContract.address] =
+        getContractCount(record.derivativeContract)
+      addListenersToEmailLedgerRecord(record)
+    })
+    return ledger
+  }),
+  contractsToCount: {},
+})
 
 function addListenersToERC721LedgerRecord({
   derivativeContract,
