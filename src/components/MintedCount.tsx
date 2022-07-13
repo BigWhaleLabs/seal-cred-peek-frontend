@@ -5,10 +5,10 @@ import Loading from 'components/Loading'
 import SealCredStore from 'stores/SealCredStore'
 import formatNumber from 'helpers/formatNumber'
 import mintedBefore from 'helpers/mintedBefore'
+import useReversedLedger from 'helpers/useReversedLedger'
 
 function ContractCount() {
-  const { reverseSCERC721Ledger } = useSnapshot(SealCredStore)
-  const { reverseSCEmailLedger } = useSnapshot(SealCredStore)
+  const { reverseSCERC721Ledger, reverseSCEmailLedger } = useReversedLedger()
   return (
     <>
       <BodyText>
@@ -25,7 +25,7 @@ function MintedCount() {
     reverseSCERC721Ledger,
     reverseExternalSCERC721Ledger,
     reverseSCEmailLedger,
-  } = useSnapshot(SealCredStore)
+  } = useReversedLedger()
   const { contractsToCount } = useSnapshot(SealCredStore)
   let erc721Count = 0
   for (const contract of [...Object.keys(reverseSCERC721Ledger || {})]) {
