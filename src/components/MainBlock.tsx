@@ -21,7 +21,18 @@ export default function () {
         <Link url="https://goerli.etherscan.io/address/0xEB0cB50a5C12B376aaf555E72FE06a6ECA154292">
           SealCredLedger (v0.1)
         </Link>{' '}
-        — minted {formatNumber(mintedBefore)} derivative tokens
+        — minted {formatNumber(mintedBefore['v0.1'])} derivative tokens
+      </BodyText>
+      <BodyText>
+        SealCredLedger (v0.2) (
+        <Link url="https://goerli.etherscan.io/address/0x5AA6b79A8ea7c240c8DE59a83765AC984912A8f3">
+          email
+        </Link>
+        ,{' '}
+        <Link url="https://goerli.etherscan.io/address/0x23D23D705F00580852075add1149BF2db059512f">
+          ERC721
+        </Link>
+        ) — minted {formatNumber(mintedBefore['v0.2'])} derivative tokens
       </BodyText>
     </>
   )

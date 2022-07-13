@@ -3,6 +3,7 @@ import { Suspense } from 'react'
 import { margin } from 'classnames/tailwind'
 import { useSnapshot } from 'valtio'
 import ContractName from 'components/ContractName'
+import Network from 'models/Network'
 import SealCredStore from 'stores/SealCredStore'
 
 function MintedCount({ address }: { address: string }) {
@@ -18,10 +19,12 @@ export default function ({
   originalAddress,
   derivativeAddress,
   email,
+  network,
 }: {
   originalAddress: string
   derivativeAddress: string
   email?: boolean
+  network: Network
 }) {
   return (
     <div className={container}>
@@ -30,16 +33,22 @@ export default function ({
           url={
             email
               ? `https://${originalAddress}`
-              : `https://goerli.etherscan.io/address/${originalAddress}`
+              : `https://${
+                  network === Network.Mainnet ? '' : 'goerli.'
+                }etherscan.io/address/${originalAddress}`
           }
         >
-          <ContractName address={originalAddress} />
+          <ContractName address={originalAddress} network={network} />
         </Link>{' '}
       </BodyText>
       <BodyText>
         Derivative:{' '}
-        <Link url={`https://goerli.etherscan.io/address/${derivativeAddress}`}>
-          <ContractName address={derivativeAddress} />
+        <Link
+          url={`https://${
+            network === Network.Mainnet ? '' : 'goerli.'
+          }etherscan.io/address/${derivativeAddress}`}
+        >
+          <ContractName address={derivativeAddress} network={Network.Goerli} />
         </Link>{' '}
         <Suspense fallback={<span> (loading minted count...)</span>}>
           <MintedCount address={derivativeAddress} />
