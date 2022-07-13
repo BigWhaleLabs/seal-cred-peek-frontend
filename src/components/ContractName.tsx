@@ -2,6 +2,7 @@ import { Suspense, memo } from 'react'
 import { useSnapshot } from 'valtio'
 import { wordBreak } from 'classnames/tailwind'
 import ContractNamesStore from 'stores/ContractNamesStore'
+import Network from 'models/Network'
 import truncateMiddleIfNeeded from 'helpers/truncateMiddleIfNeeded'
 
 const addressText = wordBreak('break-all')
@@ -9,12 +10,18 @@ const addressText = wordBreak('break-all')
 interface ContractNameProps {
   address: string
   truncate?: boolean
+  network: Network
 }
 
-function ContractNameSuspended({ address, truncate }: ContractNameProps) {
+function ContractNameSuspended({
+  address,
+  truncate,
+  network,
+}: ContractNameProps) {
   const { contractNames } = useSnapshot(ContractNamesStore)
   const contractName = contractNames[address]
-  if (!contractNames[address]) ContractNamesStore.fetchContractName(address)
+  if (!contractNames[address])
+    ContractNamesStore.fetchContractName(address, network)
 
   return (
     <span className={contractName ? undefined : addressText}>
@@ -25,7 +32,7 @@ function ContractNameSuspended({ address, truncate }: ContractNameProps) {
   )
 }
 
-export default memo<ContractNameProps>(({ address, truncate }) => (
+export default memo<ContractNameProps>(({ address, truncate, network }) => (
   <Suspense
     fallback={
       <span className={addressText}>
@@ -33,6 +40,10 @@ export default memo<ContractNameProps>(({ address, truncate }) => (
       </span>
     }
   >
-    <ContractNameSuspended address={address} truncate={truncate} />
+    <ContractNameSuspended
+      address={address}
+      truncate={truncate}
+      network={network}
+    />
   </Suspense>
 ))

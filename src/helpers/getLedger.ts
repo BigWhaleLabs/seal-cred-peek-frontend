@@ -1,17 +1,18 @@
-import { SCERC721Ledger, SCEmailLedger } from 'models/Ledger'
 import {
-  SealCredERC721Ledger,
-  SealCredEmailLedger,
+  ExternalSCERC721Ledger,
+  SCERC721Ledger,
+  SCEmailLedger,
 } from '@big-whale-labs/seal-cred-ledger-contract'
+import { SCERC721LedgerModel, SCEmailLedgerModel } from 'models/Ledger'
 import {
   getERC721LedgerRecord,
   getEmailLedgerRecord,
 } from 'helpers/getLedgerRecord'
 
-export async function getERC721Ledger(sealCredLedger: SealCredERC721Ledger) {
+export async function getERC721Ledger(sealCredLedger: SCERC721Ledger) {
   const eventsFilter = sealCredLedger.filters.CreateDerivativeContract()
   const events = await sealCredLedger.queryFilter(eventsFilter)
-  const ledger = {} as SCERC721Ledger
+  const ledger = {} as SCERC721LedgerModel
   const originalToDerivative: { [address: string]: string } = {}
 
   for (const event of events) {
@@ -28,19 +29,41 @@ export async function getERC721Ledger(sealCredLedger: SealCredERC721Ledger) {
   return ledger
 }
 
-export async function getEmailLedger(sealCredLedger: SealCredEmailLedger) {
+export async function getExternalERC721Ledger(
+  sealCredLedger: ExternalSCERC721Ledger
+) {
   const eventsFilter = sealCredLedger.filters.CreateDerivativeContract()
   const events = await sealCredLedger.queryFilter(eventsFilter)
-  const ledger = {} as SCEmailLedger
+  const ledger = {} as SCERC721LedgerModel
   const originalToDerivative: { [address: string]: string } = {}
 
   for (const event of events) {
-    const { email, derivativeContract } = event.args
-    originalToDerivative[email] = derivativeContract
+    const { originalContract, derivativeContract } = event.args
+    originalToDerivative[originalContract] = derivativeContract
   }
 
-  for (const email in originalToDerivative) {
-    ledger[email] = await getEmailLedgerRecord(sealCredLedger, email)
+  for (const originalContract in originalToDerivative) {
+    ledger[originalContract] = await getERC721LedgerRecord(
+      sealCredLedger,
+      originalContract
+    )
+  }
+  return ledger
+}
+
+export async function getEmailLedger(sealCredLedger: SCEmailLedger) {
+  const eventsFilter = sealCredLedger.filters.CreateDerivativeContract()
+  const events = await sealCredLedger.queryFilter(eventsFilter)
+  const ledger = {} as SCEmailLedgerModel
+  const originalToDerivative: { [address: string]: string } = {}
+
+  for (const event of events) {
+    const { domain, derivativeContract } = event.args
+    originalToDerivative[domain] = derivativeContract
+  }
+
+  for (const domain in originalToDerivative) {
+    ledger[domain] = await getEmailLedgerRecord(sealCredLedger, domain)
   }
   return ledger
 }
