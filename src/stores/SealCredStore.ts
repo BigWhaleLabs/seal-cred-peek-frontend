@@ -116,7 +116,6 @@ goerliProvider.on(
       externalERC721Ledger[address] ||
       eRC721Ledger[address] ||
       emailLedger[address]
-    console.log('Transfer event', address, derivative)
     if (derivative) {
       SealCredStore.contractsToCount[address] = getContractCount(
         derivative.derivativeContract
