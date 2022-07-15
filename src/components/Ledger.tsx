@@ -43,7 +43,7 @@ function LedgerComponent({
 
   return (
     <>
-      <BodyText>Overall count: {Object.keys(ledger).length}</BodyText>
+      <BodyText>Contract count: {Object.keys(ledger).length}</BodyText>
 
       <BodyText>
         <Button
