@@ -117,9 +117,8 @@ goerliProvider.on(
       eRC721Ledger[address] ||
       emailLedger[address]
     if (derivative) {
-      SealCredStore.contractsToCount[address] = getContractCount(
-        derivative.derivativeContract
-      )
+      SealCredStore.contractsToCount[derivative.derivativeContract.address] =
+        getContractCount(derivative.derivativeContract)
     }
   }
 )
