@@ -29,19 +29,17 @@ class ContractNamesStore extends PersistableStore {
 
   fetchContractName(address: string, network: Network) {
     if (this.contractNames[address]) return
-
     if (reservedContractMetadata[address]) {
       this.savedContractNames[address] = reservedContractMetadata[address].name
       return
     }
-    const contract = ERC721__factory.connect(
+    this.requestedNames[address] = ERC721__factory.connect(
       address,
       networkPick(network, goerliProvider, mainnetProvider)
     )
-    this.requestedNames[address] = contract
       .name()
       .then((result) => {
-        this.savedContractNames[address] = result || address
+        this.savedContractNames[address] = result
         return result || address
       })
       .catch(() => {

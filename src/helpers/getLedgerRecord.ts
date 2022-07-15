@@ -1,35 +1,32 @@
 import {
   ERC721__factory,
-  ExternalSCERC721Ledger,
   SCERC721Derivative__factory,
-  SCERC721Ledger,
   SCEmailDerivative__factory,
-  SCEmailLedger,
 } from '@big-whale-labs/seal-cred-ledger-contract'
+import { SCERC721LedgerRecord, SCEmailLedgerRecord } from 'models/LedgerRecord'
 import { goerliProvider } from 'helpers/providers'
+import isEthereumAddress from 'helpers/isEthereumAddress'
 
-export async function getERC721LedgerRecord(
-  ledgerContract: SCERC721Ledger | ExternalSCERC721Ledger,
-  originalContract: string
+export default function (
+  originalContractOrEmail: string,
+  derivativeContractAddress: string
 ) {
-  return {
-    originalContract: ERC721__factory.connect(originalContract, goerliProvider),
-    derivativeContract: SCERC721Derivative__factory.connect(
-      await ledgerContract.getDerivativeContract(originalContract),
-      goerliProvider
-    ),
-  }
-}
-
-export async function getEmailLedgerRecord(
-  ledgerContract: SCEmailLedger,
-  originalContract: string
-) {
-  return {
-    originalContract: ERC721__factory.connect(originalContract, goerliProvider),
-    derivativeContract: SCEmailDerivative__factory.connect(
-      await ledgerContract.getDerivativeContract(originalContract),
-      goerliProvider
-    ),
-  }
+  return isEthereumAddress(originalContractOrEmail)
+    ? ({
+        originalContract: ERC721__factory.connect(
+          originalContractOrEmail,
+          goerliProvider
+        ),
+        derivativeContract: SCERC721Derivative__factory.connect(
+          derivativeContractAddress,
+          goerliProvider
+        ),
+      } as SCERC721LedgerRecord)
+    : ({
+        originalEmail: originalContractOrEmail,
+        derivativeContract: SCEmailDerivative__factory.connect(
+          derivativeContractAddress,
+          goerliProvider
+        ),
+      } as SCEmailLedgerRecord)
 }

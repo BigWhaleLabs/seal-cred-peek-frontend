@@ -1,3 +1,4 @@
+import { ComponentChildren } from 'preact'
 import { Suspense } from 'react'
 import ChildrenProp from 'models/ChildrenProp'
 import ErrorBoundary from 'components/ErrorBoundary'
@@ -6,10 +7,11 @@ import Loading from 'components/Loading'
 export default function ({
   error,
   children,
-}: ChildrenProp & { error: string }) {
+  fallback,
+}: ChildrenProp & { error: string; fallback?: ComponentChildren }) {
   return (
     <ErrorBoundary fallbackText={error}>
-      <Suspense fallback={<Loading />}>{children}</Suspense>
+      <Suspense fallback={fallback || <Loading />}>{children}</Suspense>
     </ErrorBoundary>
   )
 }

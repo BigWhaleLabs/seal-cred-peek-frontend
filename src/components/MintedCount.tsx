@@ -1,45 +1,47 @@
 import { BodyText } from 'components/Text'
-import { Suspense } from 'react'
 import { useSnapshot } from 'valtio'
 import Loading from 'components/Loading'
 import SealCredStore from 'stores/SealCredStore'
+import SuspenseWithError from 'components/SuspenseWithError'
 import formatNumber from 'helpers/formatNumber'
 import mintedBefore from 'helpers/mintedBefore'
-import useReversedLedger from 'helpers/useReversedLedger'
 
 function ContractCount() {
-  const { reverseSCERC721Ledger, reverseSCEmailLedger } = useReversedLedger()
+  const { externalERC721Ledger, eRC721Ledger, emailLedger } =
+    useSnapshot(SealCredStore)
   return (
     <>
       <BodyText>
         Total contracts:{' '}
-        {Object.keys(reverseSCERC721Ledger || {}).length +
-          Object.keys(reverseSCEmailLedger || {}).length}
+        {Object.keys(externalERC721Ledger).length +
+          Object.keys(eRC721Ledger || {}).length +
+          Object.keys(emailLedger || {}).length}
       </BodyText>
     </>
   )
 }
 
 function MintedCount() {
-  const {
-    reverseSCERC721Ledger,
-    reverseExternalSCERC721Ledger,
-    reverseSCEmailLedger,
-  } = useReversedLedger()
+  const { externalERC721Ledger, eRC721Ledger, emailLedger } =
+    useSnapshot(SealCredStore)
   const { contractsToCount } = useSnapshot(SealCredStore)
   let erc721Count = 0
-  for (const contract of [...Object.keys(reverseSCERC721Ledger || {})]) {
-    erc721Count += contractsToCount[contract]?.toNumber() || 0
+  for (const {
+    derivativeContract: { address },
+  } of [...Object.values(externalERC721Ledger || {})]) {
+    erc721Count += contractsToCount[address]?.toNumber() || 0
   }
   let externalErc721Count = 0
-  for (const contract of [
-    ...Object.keys(reverseExternalSCERC721Ledger || {}),
-  ]) {
-    externalErc721Count += contractsToCount[contract]?.toNumber() || 0
+  for (const {
+    derivativeContract: { address },
+  } of [...Object.values(eRC721Ledger || {})]) {
+    externalErc721Count += contractsToCount[address]?.toNumber() || 0
   }
   let emailCount = 0
-  for (const contract of [...Object.keys(reverseSCEmailLedger || {})]) {
-    emailCount += contractsToCount[contract]?.toNumber() || 0
+  for (const {
+    derivativeContract: { address },
+  } of [...Object.values(emailLedger || {})]) {
+    emailCount += contractsToCount[address]?.toNumber() || 0
   }
   const totalCount = erc721Count + emailCount + externalErc721Count
   const mintedBeforeCount = mintedBefore['v0.1'] + mintedBefore['v0.2']
@@ -67,12 +69,18 @@ function MintedCount() {
 export default function () {
   return (
     <div>
-      <Suspense fallback={<Loading text="Loading contract count..." />}>
+      <SuspenseWithError
+        fallback={<Loading text="Loading contract count..." />}
+        error="Error loading contract count"
+      >
         <ContractCount />
-      </Suspense>
-      <Suspense fallback={<Loading text="Loading count..." />}>
+      </SuspenseWithError>
+      <SuspenseWithError
+        fallback={<Loading text="Loading minted count..." />}
+        error="Error loading minted count"
+      >
         <MintedCount />
-      </Suspense>
+      </SuspenseWithError>
     </div>
   )
 }

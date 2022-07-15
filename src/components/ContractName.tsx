@@ -1,8 +1,9 @@
-import { Suspense, memo } from 'react'
+import { memo } from 'react'
 import { useSnapshot } from 'valtio'
 import { wordBreak } from 'classnames/tailwind'
 import ContractNamesStore from 'stores/ContractNamesStore'
 import Network from 'models/Network'
+import SuspenseWithError from 'components/SuspenseWithError'
 import truncateMiddleIfNeeded from 'helpers/truncateMiddleIfNeeded'
 
 const addressText = wordBreak('break-all')
@@ -33,17 +34,18 @@ function ContractNameSuspended({
 }
 
 export default memo<ContractNameProps>(({ address, truncate, network }) => (
-  <Suspense
+  <SuspenseWithError
     fallback={
       <span className={addressText}>
         {truncate ? truncateMiddleIfNeeded(address, 17) : address}
       </span>
     }
+    error={`Error loading contract name for ${address}`}
   >
     <ContractNameSuspended
       address={address}
       truncate={truncate}
       network={network}
     />
-  </Suspense>
+  </SuspenseWithError>
 ))

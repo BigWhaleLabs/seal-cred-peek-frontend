@@ -10,6 +10,6 @@ export interface SCERC721LedgerRecord {
 }
 
 export interface SCEmailLedgerRecord {
-  originalContract: ERC721
+  originalEmail: string
   derivativeContract: SCEmailDerivative
 }

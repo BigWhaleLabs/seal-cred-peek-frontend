@@ -1,10 +1,11 @@
 import { BodyText, Link } from 'components/Text'
-import { Suspense } from 'react'
 import { margin } from 'classnames/tailwind'
 import { useSnapshot } from 'valtio'
 import ContractName from 'components/ContractName'
 import Network from 'models/Network'
 import SealCredStore from 'stores/SealCredStore'
+import SuspenseWithError from 'components/SuspenseWithError'
+import isEthereumAddress from 'helpers/isEthereumAddress'
 
 function MintedCount({ address }: { address: string }) {
   const { contractsToCount } = useSnapshot(SealCredStore)
@@ -16,29 +17,32 @@ function MintedCount({ address }: { address: string }) {
 
 const container = margin('mb-1')
 export default function ({
-  originalAddress,
+  originalAddressOrEmail,
   derivativeAddress,
-  email,
   network,
 }: {
-  originalAddress: string
+  originalAddressOrEmail: string
   derivativeAddress: string
-  email?: boolean
   network: Network
 }) {
+  const isEmail = !isEthereumAddress(originalAddressOrEmail)
   return (
     <div className={container}>
       <BodyText>
         <Link
           url={
-            email
-              ? `https://${originalAddress}`
+            isEmail
+              ? `https://${originalAddressOrEmail}`
               : `https://${
                   network === Network.Mainnet ? '' : 'goerli.'
-                }etherscan.io/address/${originalAddress}`
+                }etherscan.io/address/${originalAddressOrEmail}`
           }
         >
-          <ContractName address={originalAddress} network={network} />
+          {isEmail ? (
+            <>{originalAddressOrEmail}</>
+          ) : (
+            <ContractName address={originalAddressOrEmail} network={network} />
+          )}
         </Link>{' '}
       </BodyText>
       <BodyText>
@@ -50,9 +54,12 @@ export default function ({
         >
           <ContractName address={derivativeAddress} network={Network.Goerli} />
         </Link>{' '}
-        <Suspense fallback={<span> (loading minted count...)</span>}>
+        <SuspenseWithError
+          fallback={<span> (loading minted count...)</span>}
+          error="(error loading minted count)"
+        >
           <MintedCount address={derivativeAddress} />
-        </Suspense>
+        </SuspenseWithError>
       </BodyText>
     </div>
   )
