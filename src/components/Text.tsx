@@ -51,3 +51,41 @@ const errorText = textColor('text-red-500')
 export function ErrorText({ children }: ChildrenProp) {
   return <p className={errorText}>{children}</p>
 }
+
+const sectionSubheaderContainer = classnames(
+  grayText,
+  fontWeight('font-bold'),
+  fontSize('text-lg')
+)
+export function SectionSubheader({ children }: ChildrenProp) {
+  return <p className={sectionSubheaderContainer}>{children}</p>
+}
+
+const footerLink = classnames(
+  whiteText,
+  fontSize('text-sm'),
+  fontWeight('font-semibold'),
+  textDecoration('no-underline', 'hover:underline')
+)
+export function FooterlLink({
+  url,
+  children,
+}: ChildrenProp & {
+  url: string
+}) {
+  return (
+    <a
+      className={footerLink}
+      href={url}
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      {children}
+    </a>
+  )
+}
+
+const footerDelimiterText = classnames(grayText, fontSize('text-xs'))
+export function FooterDelimiterText({ children }: ChildrenProp) {
+  return <span className={footerDelimiterText}>{children}</span>
+}
