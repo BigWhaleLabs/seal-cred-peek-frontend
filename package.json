@@ -33,6 +33,7 @@
     "ethers": "^5.6.9",
     "preact": "^10.9.0",
     "react-chartjs-2": "^4.3.0",
+    "react-router-dom": "^6.3.0",
     "secure-ls": "^1.2.6",
     "valtio": "^1.6.1"
   },
