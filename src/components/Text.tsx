@@ -84,3 +84,8 @@ export function FooterlLink({
     </a>
   )
 }
+
+const footerDelimiterText = classnames(grayText, fontSize('text-xs'))
+export function FooterDelimiterText({ children }: ChildrenProp) {
+  return <span className={footerDelimiterText}>{children}</span>
+}
