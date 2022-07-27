@@ -5,7 +5,7 @@ import Section from 'components/Section'
 export default function () {
   return (
     <div className={space('space-y-4')}>
-      <HeaderText>Terms of Use</HeaderText>
+      <HeaderText>Terms of Service</HeaderText>
       <div className={space('space-y-4')}>
         <Section>
           <SectionSubheader>Terms</SectionSubheader>

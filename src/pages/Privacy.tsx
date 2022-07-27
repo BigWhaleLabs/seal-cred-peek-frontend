@@ -5,12 +5,12 @@ import Section from 'components/Section'
 export default function () {
   return (
     <div className={space('space-y-4')}>
-      <HeaderText>Privacy policy</HeaderText>
+      <HeaderText>Privacy Policy</HeaderText>
       <div className={space('space-y-4')}>
         <Section>
           <BodyText>
-            Project operates the website listed at borodutch.com, which provides
-            the SERVICE.
+            Project operates the website listed at peek.sealcred.xyz, which
+            provides the SERVICE.
           </BodyText>
           <BodyText>
             This page is used to inform website visitors regarding our policies

@@ -23,7 +23,7 @@ const footerContainer = classnames(
 export default function () {
   return (
     <div className={footerContainer}>
-      <FooterlLink url="https://blog.bigwhalelabs.com/">Bwl</FooterlLink>
+      <FooterlLink url="https://bigwhalelabs.com/">BWL</FooterlLink>
       <Delimiter />
       <FooterlLink url="https://blog.bigwhalelabs.com/">Blog</FooterlLink>
       <Delimiter />
