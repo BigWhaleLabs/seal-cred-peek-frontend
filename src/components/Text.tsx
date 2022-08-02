@@ -1,3 +1,4 @@
+import { Link as InternalLink } from 'react-router-dom'
 import {
   classnames,
   fontSize,
@@ -70,10 +71,16 @@ const footerLink = classnames(
 export function FooterlLink({
   url,
   children,
+  internal,
 }: ChildrenProp & {
   url: string
+  internal?: boolean
 }) {
-  return (
+  return internal ? (
+    <InternalLink to={url} className={footerLink}>
+      {children}
+    </InternalLink>
+  ) : (
     <a
       className={footerLink}
       href={url}
