@@ -29,9 +29,13 @@ export default function () {
       <Delimiter />
       <FooterlLink url="https://sealcred.xyz/">SealCred</FooterlLink>
       <Delimiter />
-      <FooterlLink url="/terms">Terms of service</FooterlLink>
+      <FooterlLink internal url="/terms">
+        Terms of service
+      </FooterlLink>
       <Delimiter />
-      <FooterlLink url="/privacy">Privacy policy</FooterlLink>
+      <FooterlLink internal url="/privacy">
+        Privacy policy
+      </FooterlLink>
     </div>
   )
 }
