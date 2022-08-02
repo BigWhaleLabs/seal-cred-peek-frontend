@@ -1,4 +1,4 @@
-import { NavLink } from 'react-router-dom'
+import { Link as InternalLink } from 'react-router-dom'
 import {
   classnames,
   fontSize,
@@ -77,9 +77,9 @@ export function FooterlLink({
   internal?: boolean
 }) {
   return internal ? (
-    <NavLink to={url} className={footerLink}>
+    <InternalLink to={url} className={footerLink}>
       {children}
-    </NavLink>
+    </InternalLink>
   ) : (
     <a
       className={footerLink}
