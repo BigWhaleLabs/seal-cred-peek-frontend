@@ -1,11 +1,12 @@
-import { BodyText, HeaderText, Link, SectionSubheader } from 'components/Text'
+import { BodyText, LinkText, SectionSubheader } from 'components/Text'
 import { space } from 'classnames/tailwind'
+import PageTitle from 'components/PageTitle'
 import Section from 'components/Section'
 
 export default function () {
   return (
     <div className={space('space-y-4')}>
-      <HeaderText>Terms of Service</HeaderText>
+      <PageTitle backButton title="Terms of Service" />
       <div className={space('space-y-4')}>
         <Section>
           <SectionSubheader>Terms</SectionSubheader>
@@ -72,7 +73,11 @@ export default function () {
         <Section>
           <SectionSubheader>Your Privacy</SectionSubheader>
           <BodyText>
-            Please read our <Link url="/privacy">Privacy Policy</Link>.
+            Please read our{' '}
+            <LinkText internal url="/privacy">
+              Privacy Policy
+            </LinkText>
+            .
           </BodyText>
         </Section>
         <Section>
