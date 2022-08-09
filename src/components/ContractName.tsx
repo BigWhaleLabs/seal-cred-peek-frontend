@@ -1,9 +1,11 @@
+import { goerliProvider, mainnetProvider } from 'helpers/providers'
 import { memo } from 'react'
 import { useSnapshot } from 'valtio'
 import { wordBreak } from 'classnames/tailwind'
 import ContractNamesStore from 'stores/ContractNamesStore'
 import Network from 'models/Network'
 import SuspenseWithError from 'components/SuspenseWithError'
+import networkPick from 'helpers/networkPick'
 import truncateMiddleIfNeeded from 'helpers/truncateMiddleIfNeeded'
 
 const addressText = wordBreak('break-all')
@@ -22,7 +24,10 @@ function ContractNameSuspended({
   const { contractNames } = useSnapshot(ContractNamesStore)
   const contractName = contractNames[address]
   if (!contractNames[address])
-    ContractNamesStore.fetchContractName(address, network)
+    ContractNamesStore.fetchContractName(
+      address,
+      networkPick(network, goerliProvider, mainnetProvider)
+    )
 
   return (
     <span className={contractName ? undefined : addressText}>
