@@ -27,7 +27,8 @@ class ContractNamesStore extends PersistableStore {
     return disallowList.includes(key) ? undefined : value
   }
 
-  fetchContractName(address: string, network: Network) {
+  fetchContractName(addressAnycase: string, network: Network) {
+    const address = addressAnycase.toLowerCase()
     if (this.contractNames[address]) return
     if (RESERVED_CONTRACT_METADATA[address]) {
       this.savedContractNames[address] =
