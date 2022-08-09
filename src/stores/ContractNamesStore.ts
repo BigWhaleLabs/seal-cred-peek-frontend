@@ -1,7 +1,7 @@
 import { ERC721__factory } from '@big-whale-labs/seal-cred-ledger-contract'
+import { RESERVED_CONTRACT_METADATA } from '@big-whale-labs/constants'
 import { goerliProvider, mainnetProvider } from 'helpers/providers'
 import { proxy } from 'valtio'
-import { reservedContractMetadata } from '@big-whale-labs/constants'
 import Network from 'models/Network'
 import PersistableStore from 'stores/persistence/PersistableStore'
 import networkPick from 'helpers/networkPick'
@@ -29,8 +29,9 @@ class ContractNamesStore extends PersistableStore {
 
   fetchContractName(address: string, network: Network) {
     if (this.contractNames[address]) return
-    if (reservedContractMetadata[address]) {
-      this.savedContractNames[address] = reservedContractMetadata[address].name
+    if (RESERVED_CONTRACT_METADATA[address]) {
+      this.savedContractNames[address] =
+        RESERVED_CONTRACT_METADATA[address].name
       return
     }
     this.requestedNames[address] = ERC721__factory.connect(

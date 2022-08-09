@@ -1,10 +1,5 @@
-import {
-  SCERC721Derivative,
-  SCEmailDerivative,
-} from '@big-whale-labs/seal-cred-ledger-contract'
+import { Derivative } from '@big-whale-labs/seal-cred-ledger-contract'
 
-export default function getContractCount(
-  contract: SCERC721Derivative | SCEmailDerivative
-) {
-  return contract.currentTokenId()
+export default async function getContractCount(contract: Derivative) {
+  return (await contract.currentTokenId()).toNumber()
 }

@@ -8,8 +8,8 @@ import SuspenseWithError from 'components/SuspenseWithError'
 import isEthereumAddress from 'helpers/isEthereumAddress'
 
 function MintedCount({ address }: { address: string }) {
-  const { contractsToCount } = useSnapshot(SealCredStore)
-  const count = contractsToCount[address]?.toNumber()
+  const { addressToCount } = useSnapshot(SealCredStore)
+  const count = addressToCount[address]
   const message =
     count !== undefined ? `(minted: ${count})` : '(loading minted count...)'
   return <>{message}</>

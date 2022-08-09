@@ -1,67 +1,68 @@
 import { BodyText } from 'components/Text'
+import { margin } from 'classnames/tailwind'
 import { useSnapshot } from 'valtio'
 import Loading from 'components/Loading'
 import SealCredStore from 'stores/SealCredStore'
 import SuspenseWithError from 'components/SuspenseWithError'
 import formatNumber from 'helpers/formatNumber'
-import mintedBefore from 'helpers/mintedBefore'
+import ledgerContracts from 'helpers/data/ledgerContracts'
+import previousData from 'helpers/data/previousData'
 
 function ContractCount() {
-  const { externalERC721Ledger, eRC721Ledger, emailLedger } =
-    useSnapshot(SealCredStore)
+  const { ledgers } = useSnapshot(SealCredStore)
+  let count = 0
+  for (const name of Object.keys(ledgerContracts)) {
+    count += Object.keys(ledgers[name]).length
+  }
   return (
     <>
-      <BodyText>
-        Total contracts:{' '}
-        {Object.keys(externalERC721Ledger).length +
-          Object.keys(eRC721Ledger || {}).length +
-          Object.keys(emailLedger || {}).length}
-      </BodyText>
+      <BodyText>Contracts: {count}</BodyText>
     </>
   )
 }
 
 function MintedCount() {
-  const { externalERC721Ledger, eRC721Ledger, emailLedger } =
-    useSnapshot(SealCredStore)
-  const { contractsToCount } = useSnapshot(SealCredStore)
-  let erc721Count = 0
-  for (const {
-    derivativeContract: { address },
-  } of [...Object.values(externalERC721Ledger || {})]) {
-    erc721Count += contractsToCount[address]?.toNumber() || 0
+  const { ledgers, addressToCount } = useSnapshot(SealCredStore)
+  const counts = {} as { [name: string]: number }
+  for (const name of Object.keys(ledgerContracts)) {
+    const ledger = ledgers[name]
+    counts[name] = Object.values(ledger).reduce(
+      (acc, { derivativeContract }) =>
+        // eslint-disable-next-line valtio/state-snapshot-rule
+        acc + (addressToCount[derivativeContract.address] || 0),
+      0
+    )
   }
-  let externalErc721Count = 0
-  for (const {
-    derivativeContract: { address },
-  } of [...Object.values(eRC721Ledger || {})]) {
-    externalErc721Count += contractsToCount[address]?.toNumber() || 0
-  }
-  let emailCount = 0
-  for (const {
-    derivativeContract: { address },
-  } of [...Object.values(emailLedger || {})]) {
-    emailCount += contractsToCount[address]?.toNumber() || 0
-  }
-  const totalCount = erc721Count + emailCount + externalErc721Count
-  const mintedBeforeCount = mintedBefore['v0.1'] + mintedBefore['v0.2']
-  return totalCount === 0 ? (
-    <Loading text="Loading count..." />
-  ) : (
+  const totalCount = Object.values(counts).reduce(
+    (acc, count) => acc + count,
+    0
+  )
+  const mintedBeforeCount = previousData.reduce(
+    (acc, { count }) => acc + count,
+    0
+  )
+  return (
     <>
-      <BodyText>Total: {formatNumber(totalCount)}</BodyText>
-      <BodyText>
-        Total Mainnet ERC721: {formatNumber(externalErc721Count)}
-      </BodyText>
-      <BodyText>Total Goerli ERC721: {formatNumber(erc721Count)}</BodyText>
-      <BodyText>Total email: {formatNumber(emailCount)}</BodyText>
-      <BodyText>
-        Total previous versions: {formatNumber(mintedBeforeCount)}
-      </BodyText>
-      <BodyText>
-        Total all time and all versions:{' '}
-        {formatNumber(totalCount + mintedBeforeCount)}
-      </BodyText>
+      <div className={margin('my-2')}>
+        <BodyText>Minted derivatives:</BodyText>
+        <BodyText>
+          Total for current version: {formatNumber(totalCount)}
+        </BodyText>
+        {Object.entries(counts).map(([name, count]) => (
+          <div key={name}>
+            <BodyText>
+              {ledgerContracts[name].name}: {formatNumber(count)}
+            </BodyText>
+          </div>
+        ))}
+        <BodyText>
+          Previous versions: {formatNumber(mintedBeforeCount)}
+        </BodyText>
+        <BodyText>
+          All time and all versions:{' '}
+          {formatNumber(totalCount + mintedBeforeCount)}
+        </BodyText>
+      </div>
     </>
   )
 }

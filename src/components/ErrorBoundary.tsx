@@ -22,7 +22,9 @@ export default class extends Component<{
       console.error(this.state.error)
       return (
         <div className={errorContrainer}>
-          <ErrorText>{this.props.fallbackText}</ErrorText>
+          <ErrorText>
+            {this.props.fallbackText}: {this.state.error?.message}
+          </ErrorText>
         </div>
       )
     }

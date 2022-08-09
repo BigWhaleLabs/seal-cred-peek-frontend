@@ -3,42 +3,19 @@ import { Suspense, useState } from 'preact/compat'
 import { useSnapshot } from 'valtio'
 import Button from 'components/Button'
 import Contract from 'components/Contract'
-import Ledger from 'models/Ledger'
 import Loading from 'components/Loading'
 import Network from 'models/Network'
 import SealCredStore from 'stores/SealCredStore'
-
-enum LedgerType {
-  SCERC721 = 'SCERC721',
-  ExternalSCERC721 = 'ExternalSCERC721',
-  SCEmail = 'SCEmail',
-}
+import ledgerContracts from 'helpers/data/ledgerContracts'
 
 function LedgerComponent({
-  type,
+  variableName,
   network,
 }: {
-  type: LedgerType
+  variableName: string
   network: Network
 }) {
-  let ledger: Ledger
-  switch (type) {
-    case LedgerType.SCERC721: {
-      const { eRC721Ledger } = useSnapshot(SealCredStore)
-      ledger = eRC721Ledger as unknown as Ledger
-      break
-    }
-    case LedgerType.ExternalSCERC721: {
-      const { externalERC721Ledger } = useSnapshot(SealCredStore)
-      ledger = externalERC721Ledger as unknown as Ledger
-      break
-    }
-    case LedgerType.SCEmail: {
-      const { emailLedger } = useSnapshot(SealCredStore)
-      ledger = emailLedger as unknown as Ledger
-      break
-    }
-  }
+  const ledger = useSnapshot(SealCredStore.ledgers)[variableName]
   const [showing, setShowing] = useState(false)
 
   return (
@@ -70,16 +47,16 @@ function LedgerComponent({
 }
 
 function LedgerSuspender({
-  type,
+  variableName,
   network,
 }: {
-  type: LedgerType
+  variableName: string
   network: Network
 }) {
   return (
     <>
       <Suspense fallback={<Loading />}>
-        <LedgerComponent type={type} network={network} />
+        <LedgerComponent variableName={variableName} network={network} />
       </Suspense>
     </>
   )
@@ -88,15 +65,14 @@ function LedgerSuspender({
 export default function () {
   return (
     <>
-      <SubheaderText>Mainnet ERC721 Ledger:</SubheaderText>
-      <LedgerSuspender
-        type={LedgerType.ExternalSCERC721}
-        network={Network.Mainnet}
-      />
-      <SubheaderText>Goerli ERC721 Ledger:</SubheaderText>
-      <LedgerSuspender type={LedgerType.SCERC721} network={Network.Goerli} />
-      <SubheaderText>Email Ledger:</SubheaderText>
-      <LedgerSuspender type={LedgerType.SCEmail} network={Network.Goerli} />
+      {Object.entries(ledgerContracts).map(
+        ([variableName, { name, network }]) => (
+          <>
+            <SubheaderText>{name}</SubheaderText>
+            <LedgerSuspender variableName={variableName} network={network} />
+          </>
+        )
+      )}
     </>
   )
 }

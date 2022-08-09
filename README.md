@@ -24,5 +24,5 @@ Website that shows the current state of the SealCredERC721Ledger contract.
 | `VITE_ETH_RPC_MAINNET`                            | Ethereum mainnet node RPC URI (defaults to @bwl/constants)                  |
 | `VITE_SC_EMAIL_LEDGER_CONTRACT_ADDRESS`           | Address of the SCEmailLedger contract (defaults to @bwl/constants)          |
 | `VITE_SC_ERC721_LEDGER_CONTRACT_ADDRESS`          | Address of the SCERC721Ledger contract (defaults to @bwl/constants)         |
-| `VITE_EXTERNAL_SC_ERC721_LEDGER_CONTRACT_ADDRESS` | Address of the ExternalSCERC721Ledger contract (defaults to @bwl/constants) |
+| `VITE_SC_EXTERNAL_ERC721_LEDGER_CONTRACT_ADDRESS` | Address of the ExternalSCERC721Ledger contract (defaults to @bwl/constants) |
 | `VITE_ENCRYPT_KEY`                                | Secret key to encrypt local storage                                         |
