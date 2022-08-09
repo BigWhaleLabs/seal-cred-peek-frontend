@@ -2,7 +2,7 @@
 # Manual changes might be lost - proceed with caution!
 
 __metadata:
-  version: 6
+  version: 5
   cacheKey: 8
 
 "@ampproject/remapping@npm:^2.1.0":
@@ -2844,16 +2844,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@big-whale-labs/store-utils@npm:^0.1.5":
-  version: 0.1.5
-  resolution: "@big-whale-labs/store-utils@npm:0.1.5"
+"@big-whale-labs/stores@npm:^0.1.6":
+  version: 0.1.6
+  resolution: "@big-whale-labs/stores@npm:0.1.6"
   dependencies:
     "@big-whale-labs/constants": ^0.1.19
     "@big-whale-labs/seal-cred-ledger-contract": ^0.2.6
     ethers: ^5.6.9
     secure-ls: ^1.2.6
     valtio: ^1.6.3
-  checksum: 4200df619fff7ca13c21918ad706f9a5322b48c43c6cf76f5c8f02e8e238813851e9d989ba2a729a7f7ed2903384429089311907802fe81c33936ecb605f332a
+  checksum: 9fc46de731ce089c7996fb85e80e3c96d404398302272add21b59e6bd89303b8a52ba3408cc5c9d621ea076d6e81d7761076a207a201da7365fac1c45f2e2864
   languageName: node
   linkType: hard
 
@@ -4804,21 +4804,21 @@ __metadata:
   languageName: node
   linkType: hard
 
-"acorn@npm:^8.5.0, acorn@npm:^8.8.0":
-  version: 8.8.0
-  resolution: "acorn@npm:8.8.0"
-  bin:
-    acorn: bin/acorn
-  checksum: 7270ca82b242eafe5687a11fea6e088c960af712683756abf0791b68855ea9cace3057bd5e998ffcef50c944810c1e0ca1da526d02b32110e13c722aa959afdc
-  languageName: node
-  linkType: hard
-
 "acorn@npm:^8.7.1":
   version: 8.7.1
   resolution: "acorn@npm:8.7.1"
   bin:
     acorn: bin/acorn
   checksum: aca0aabf98826717920ac2583fdcad0a6fbe4e583fdb6e843af2594e907455aeafe30b1e14f1757cd83ce1776773cf8296ffc3a4acf13f0bd3dfebcf1db6ae80
+  languageName: node
+  linkType: hard
+
+"acorn@npm:^8.8.0":
+  version: 8.8.0
+  resolution: "acorn@npm:8.8.0"
+  bin:
+    acorn: bin/acorn
+  checksum: 7270ca82b242eafe5687a11fea6e088c960af712683756abf0791b68855ea9cace3057bd5e998ffcef50c944810c1e0ca1da526d02b32110e13c722aa959afdc
   languageName: node
   linkType: hard
 
@@ -13929,7 +13929,7 @@ __metadata:
   dependencies:
     "@big-whale-labs/constants": ^0.1.17
     "@big-whale-labs/seal-cred-ledger-contract": ^0.2.6
-    "@big-whale-labs/store-utils": ^0.1.5
+    "@big-whale-labs/stores": ^0.1.6
     "@preact/preset-vite": ^2.3.0
     "@types/node": ^18.6.5
     "@typescript-eslint/eslint-plugin": ^5.33.0
