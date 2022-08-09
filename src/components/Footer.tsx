@@ -1,4 +1,4 @@
-import { FooterlLink } from 'components/Text'
+import { LinkText } from 'components/Text'
 import Delimiter from 'components/Delimiter'
 import classnames, {
   alignItems,
@@ -23,19 +23,19 @@ const footerContainer = classnames(
 export default function () {
   return (
     <div className={footerContainer}>
-      <FooterlLink url="https://bigwhalelabs.com/">BWL</FooterlLink>
+      <LinkText url="https://bigwhalelabs.com/">BWL</LinkText>
       <Delimiter />
-      <FooterlLink url="https://blog.bigwhalelabs.com/">Blog</FooterlLink>
+      <LinkText url="https://blog.bigwhalelabs.com/">Blog</LinkText>
       <Delimiter />
-      <FooterlLink url="https://sealcred.xyz/">SealCred</FooterlLink>
+      <LinkText url="https://sealcred.xyz/">SealCred</LinkText>
       <Delimiter />
-      <FooterlLink internal url="/terms">
+      <LinkText internal url="/terms">
         Terms of service
-      </FooterlLink>
+      </LinkText>
       <Delimiter />
-      <FooterlLink internal url="/privacy">
+      <LinkText internal url="/privacy">
         Privacy policy
-      </FooterlLink>
+      </LinkText>
     </div>
   )
 }

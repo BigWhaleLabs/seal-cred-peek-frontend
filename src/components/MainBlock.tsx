@@ -1,7 +1,8 @@
-import { BodyText, HeaderText, Link, SubheaderText } from 'components/Text'
+import { BodyText, Link, SubheaderText } from 'components/Text'
 import ContractAddress from 'components/ContractAddress'
 import Ledger from 'components/Ledger'
 import MintedCount from 'components/MintedCount'
+import PageTitle from 'components/PageTitle'
 import SuspenseWithError from 'components/SuspenseWithError'
 import formatNumber from 'helpers/formatNumber'
 import previousData from 'helpers/data/previousData'
@@ -9,7 +10,7 @@ import previousData from 'helpers/data/previousData'
 export default function () {
   return (
     <>
-      <HeaderText>SealCred state</HeaderText>
+      <PageTitle title="SealCred state" />
       <ContractAddress />
       <SubheaderText>Total counts:</SubheaderText>
       <MintedCount />

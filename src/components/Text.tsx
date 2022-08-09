@@ -1,4 +1,4 @@
-import { Link as InternalLink } from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
 import {
   classnames,
   fontSize,
@@ -16,8 +16,7 @@ const grayText = classnames(textColor('text-gray-300'))
 const headerText = classnames(
   whiteText,
   fontSize('text-3xl', 'md:text-6xl'),
-  fontWeight('font-bold'),
-  margin('mb-6')
+  fontWeight('font-bold')
 )
 export function HeaderText({ children }: ChildrenProp) {
   return <p className={headerText}>{children}</p>
@@ -62,13 +61,14 @@ export function SectionSubheader({ children }: ChildrenProp) {
   return <p className={sectionSubheaderContainer}>{children}</p>
 }
 
-const footerLink = classnames(
-  whiteText,
-  fontSize('text-sm'),
-  fontWeight('font-semibold'),
-  textDecoration('no-underline', 'hover:underline')
-)
-export function FooterlLink({
+const linkText = (active?: boolean) =>
+  classnames(
+    whiteText,
+    fontSize('text-sm'),
+    fontWeight('font-semibold'),
+    textDecoration({ underline: active, 'hover:underline': true })
+  )
+export function LinkText({
   url,
   children,
   internal,
@@ -77,12 +77,15 @@ export function FooterlLink({
   internal?: boolean
 }) {
   return internal ? (
-    <InternalLink to={url} className={footerLink}>
+    <NavLink
+      to={url}
+      className={({ isActive }: { isActive: boolean }) => linkText(isActive)}
+    >
       {children}
-    </InternalLink>
+    </NavLink>
   ) : (
     <a
-      className={footerLink}
+      className={linkText()}
       href={url}
       target="_blank"
       rel="noopener noreferrer"
