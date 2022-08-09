@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  --black-background: #1f2128;
+}
+
 body {
   margin: 0;
   -webkit-font-smoothing: antialiased;
