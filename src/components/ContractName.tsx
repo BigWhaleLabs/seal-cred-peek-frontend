@@ -2,7 +2,7 @@ import { goerliProvider, mainnetProvider } from 'helpers/providers'
 import { memo } from 'react'
 import { useSnapshot } from 'valtio'
 import { wordBreak } from 'classnames/tailwind'
-import ContractNamesStore from 'stores/ContractNamesStore'
+import ContractMetadataStore from 'stores/ContractMetadataStore'
 import Network from 'models/Network'
 import SuspenseWithError from 'components/SuspenseWithError'
 import networkPick from 'helpers/networkPick'
@@ -21,10 +21,10 @@ function ContractNameSuspended({
   truncate,
   network,
 }: ContractNameProps) {
-  const { contractNames } = useSnapshot(ContractNamesStore)
+  const { contractNames } = useSnapshot(ContractMetadataStore)
   const contractName = contractNames[address]
   if (!contractNames[address])
-    ContractNamesStore.fetchContractName(
+    ContractMetadataStore.fetchContractName(
       address,
       networkPick(network, goerliProvider, mainnetProvider)
     )

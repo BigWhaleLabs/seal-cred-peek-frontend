@@ -2837,16 +2837,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@big-whale-labs/stores@npm:^0.1.10":
-  version: 0.1.10
-  resolution: "@big-whale-labs/stores@npm:0.1.10"
+"@big-whale-labs/stores@npm:^0.1.13":
+  version: 0.1.13
+  resolution: "@big-whale-labs/stores@npm:0.1.13"
   dependencies:
     "@big-whale-labs/constants": ^0.1.19
     "@big-whale-labs/seal-cred-ledger-contract": ^0.2.6
     ethers: ^5.6.9
     secure-ls: ^1.2.6
     valtio: ^1.6.3
-  checksum: e79670a3d0d8dcb5306eb87785c0c03acd6a77b4418f2602720e07a24bf59887e5c43ec9c62cdfc6b9b18380adc0b084dca5cbd80c50646ccf31de24de96ced1
+  checksum: 161bba59ac9584912e057ed9a14f27324a38342a6833a869232b3bd421f168a840e844ba53f9a128b6bb2222ea3e3430ba61626cd09b953896c4517ae7e36d16
   languageName: node
   linkType: hard
 
@@ -13922,7 +13922,7 @@ __metadata:
   dependencies:
     "@big-whale-labs/constants": ^0.1.19
     "@big-whale-labs/seal-cred-ledger-contract": ^0.2.6
-    "@big-whale-labs/stores": ^0.1.10
+    "@big-whale-labs/stores": ^0.1.13
     "@preact/preset-vite": ^2.3.0
     "@types/node": ^18.6.5
     "@typescript-eslint/eslint-plugin": ^5.33.0
