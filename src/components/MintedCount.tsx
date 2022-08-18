@@ -2,10 +2,12 @@ import { BodyText } from 'components/Text'
 import { margin } from 'classnames/tailwind'
 import { useSnapshot } from 'valtio'
 import Loading from 'components/Loading'
+import PostStoragesStore from 'stores/PostStoragesStore'
 import SealCredStore from 'stores/SealCredStore'
 import SuspenseWithError from 'components/SuspenseWithError'
 import formatNumber from 'helpers/formatNumber'
 import ledgerContracts from 'helpers/data/ledgerContracts'
+import postStorageContracts from 'helpers/data/postStorageContracts'
 import previousData from 'helpers/data/previousData'
 
 function ContractCount() {
@@ -67,6 +69,31 @@ function MintedCount() {
   )
 }
 
+function PostsCount() {
+  const { postStorages } = useSnapshot(PostStoragesStore)
+  let total = 0
+  for (const key in postStorageContracts) {
+    total += Number(postStorages[key])
+  }
+
+  return (
+    <>
+      <div className={margin('my-2')}>
+        <BodyText>Created posts:</BodyText>
+        <BodyText>Total: {formatNumber(total)}</BodyText>
+        {Object.keys(postStorageContracts).map((key) => (
+          <div key={key}>
+            <BodyText>
+              {postStorageContracts[key].name}:{' '}
+              {formatNumber(Number(postStorages[key]))}
+            </BodyText>
+          </div>
+        ))}
+      </div>
+    </>
+  )
+}
+
 export default function () {
   return (
     <div>
@@ -81,6 +108,12 @@ export default function () {
         error="Error loading minted count"
       >
         <MintedCount />
+      </SuspenseWithError>
+      <SuspenseWithError
+        fallback={<Loading text="Loading posts count..." />}
+        error="Error loading posts count"
+      >
+        <PostsCount />
       </SuspenseWithError>
     </div>
   )
