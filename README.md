@@ -1,4 +1,4 @@
-# SealCred peek frontend
+# SealCred | Peek frontend
 
 Website that shows the current state of the SealCredERC721Ledger contract.
 
