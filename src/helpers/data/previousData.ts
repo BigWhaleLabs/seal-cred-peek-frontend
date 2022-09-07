@@ -23,4 +23,17 @@ export default [
       email: '0xCd990C45d0B794Bbb47Ad31Ee3567a36c0c872e0',
     },
   },
+  {
+    version: '0.2.5',
+    count: 18045,
+    posts: 11278,
+    ledgers: {
+      'Mainnet ERC721': '0x03142727359C948ccf2791d5B006e7A5850AC015',
+      'Goerli ERC721': '0xd6f41e9Fd9C94e9E87aeDecC2E402f8677B3f0c4',
+      email: '0x71a1D7996A8EC34c731E9510780305CF81D9B86C',
+      'Mainnet ERC721 posts': '0x9836AB72b8726EaBB704A0cf549E94AaCe34aA48',
+      'Goerli ERC721 posts': '0x8412429437df66b90Cf16b57C278E1bfd34194Df',
+      'email posts': '0xACfD09a0221428acc2b1BEe67489dc15aE375b94',
+    },
+  },
 ]

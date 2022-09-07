@@ -71,16 +71,23 @@ function MintedCount() {
 
 function PostsCount() {
   const { postStorages } = useSnapshot(PostStoragesStore)
-  let total = 0
+  let totalPosts = 0
   for (const key in postStorageContracts) {
-    total += Number(postStorages[key])
+    totalPosts += Number(postStorages[key])
   }
+
+  const createdBeforePosts = previousData.reduce(
+    (acc, { posts }) => acc + (posts || 0),
+    0
+  )
 
   return (
     <>
       <div className={margin('my-2')}>
         <BodyText>Created posts:</BodyText>
-        <BodyText>Total: {formatNumber(total)}</BodyText>
+        <BodyText>
+          Total for current version: {formatNumber(totalPosts)}
+        </BodyText>
         {Object.keys(postStorageContracts).map((key) => (
           <div key={key}>
             <BodyText>
@@ -89,6 +96,13 @@ function PostsCount() {
             </BodyText>
           </div>
         ))}
+        <BodyText>
+          Previous versions: {formatNumber(createdBeforePosts)}
+        </BodyText>
+        <BodyText>
+          All time and all versions:{' '}
+          {formatNumber(totalPosts + createdBeforePosts)}
+        </BodyText>
       </div>
     </>
   )

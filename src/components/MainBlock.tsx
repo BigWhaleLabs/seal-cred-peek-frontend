@@ -18,7 +18,7 @@ export default function () {
         <Ledger />
       </SuspenseWithError>
       <SubheaderText>Previous versions snapshots:</SubheaderText>
-      {previousData.map(({ version, count, ledgers }) => (
+      {previousData.map(({ version, count, posts, ledgers }) => (
         <BodyText key={version}>
           v{version} (
           {Object.entries(ledgers).map(([ledgerName, address], i) => (
@@ -30,6 +30,7 @@ export default function () {
             </span>
           ))}
           ) — minted {formatNumber(count)} derivative tokens
+          {posts && ` and created ${formatNumber(posts)} posts`}
         </BodyText>
       ))}
     </>
