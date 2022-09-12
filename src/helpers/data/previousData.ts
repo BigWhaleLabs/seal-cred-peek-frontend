@@ -24,8 +24,8 @@ export default [
     },
   },
   {
-    version: '0.2.5',
-    count: 18045,
+    version: '0.2.6',
+    count: 18086,
     posts: 11278,
     ledgers: {
       'Mainnet ERC721': '0x03142727359C948ccf2791d5B006e7A5850AC015',
