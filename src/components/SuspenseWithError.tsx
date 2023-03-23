@@ -5,8 +5,8 @@ import ErrorBoundary from 'components/ErrorBoundary'
 import Loading from 'components/Loading'
 
 export default function ({
-  error,
   children,
+  error,
   fallback,
 }: ChildrenProp & { error: string; fallback?: ComponentChildren }) {
   return (
