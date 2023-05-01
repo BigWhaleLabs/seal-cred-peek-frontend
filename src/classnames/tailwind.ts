@@ -276,6 +276,11 @@ export type TBackgroundColor =
   | 'bg-rose-700'
   | 'bg-rose-800'
   | 'bg-rose-900'
+  | 'bg-formal-accent'
+  | 'bg-tertiary'
+  | 'bg-primary'
+  | 'bg-primary-dark'
+  | 'bg-primary-semi-transparent'
 
 export type TBackgroundPosition =
   | 'bg-bottom'
@@ -977,6 +982,21 @@ export type TGradientColorStops =
   | 'from-rose-900'
   | 'via-rose-900'
   | 'to-rose-900'
+  | 'from-formal-accent'
+  | 'via-formal-accent'
+  | 'to-formal-accent'
+  | 'from-tertiary'
+  | 'via-tertiary'
+  | 'to-tertiary'
+  | 'from-primary'
+  | 'via-primary'
+  | 'to-primary'
+  | 'from-primary-dark'
+  | 'via-primary-dark'
+  | 'to-primary-dark'
+  | 'from-primary-semi-transparent'
+  | 'via-primary-semi-transparent'
+  | 'to-primary-semi-transparent'
 
 export type TBackgrounds =
   | TBackgroundAttachment
@@ -2581,6 +2601,31 @@ export type TBorderColor =
   | 'border-l-rose-900'
   | 'border-x-rose-900'
   | 'border-y-rose-900'
+  | 'border-formal-accent'
+  | 'border-t-formal-accent'
+  | 'border-r-formal-accent'
+  | 'border-b-formal-accent'
+  | 'border-l-formal-accent'
+  | 'border-tertiary'
+  | 'border-t-tertiary'
+  | 'border-r-tertiary'
+  | 'border-b-tertiary'
+  | 'border-l-tertiary'
+  | 'border-primary'
+  | 'border-t-primary'
+  | 'border-r-primary'
+  | 'border-b-primary'
+  | 'border-l-primary'
+  | 'border-primary-dark'
+  | 'border-t-primary-dark'
+  | 'border-r-primary-dark'
+  | 'border-b-primary-dark'
+  | 'border-l-primary-dark'
+  | 'border-primary-semi-transparent'
+  | 'border-t-primary-semi-transparent'
+  | 'border-r-primary-semi-transparent'
+  | 'border-b-primary-semi-transparent'
+  | 'border-l-primary-semi-transparent'
 
 export type TBorderOpacity =
   | 'border-opacity-0'
@@ -3203,6 +3248,11 @@ export type TRingColor =
   | 'ring-rose-700'
   | 'ring-rose-800'
   | 'ring-rose-900'
+  | 'ring-formal-accent'
+  | 'ring-tertiary'
+  | 'ring-primary'
+  | 'ring-primary-dark'
+  | 'ring-primary-semi-transparent'
 
 export type TRingWidth =
   | 'ring-0'
@@ -3457,6 +3507,11 @@ export type TRingOffsetColor =
   | 'ring-offset-rose-700'
   | 'ring-offset-rose-800'
   | 'ring-offset-rose-900'
+  | 'ring-offset-formal-accent'
+  | 'ring-offset-tertiary'
+  | 'ring-offset-primary'
+  | 'ring-offset-primary-dark'
+  | 'ring-offset-primary-semi-transparent'
 
 export type TRingOffsetWidth =
   | 'ring-offset-0'
@@ -3705,6 +3760,11 @@ export type TOutlineColor =
   | 'outline-rose-700'
   | 'outline-rose-800'
   | 'outline-rose-900'
+  | 'outline-formal-accent'
+  | 'outline-tertiary'
+  | 'outline-primary'
+  | 'outline-primary-dark'
+  | 'outline-primary-semi-transparent'
 
 export type TBorders =
   | TBorderStyle
@@ -3777,6 +3837,9 @@ export type TBoxShadow =
   | 'shadow-2xl'
   | 'shadow-inner'
   | 'shadow-none'
+  | 'shadow-button'
+  | 'shadow-button-active'
+  | 'shadow-card'
 
 export type TBoxShadowColor =
   | 'shadow-inherit'
@@ -4004,6 +4067,11 @@ export type TBoxShadowColor =
   | 'shadow-rose-700'
   | 'shadow-rose-800'
   | 'shadow-rose-900'
+  | 'shadow-formal-accent'
+  | 'shadow-tertiary'
+  | 'shadow-primary'
+  | 'shadow-primary-dark'
+  | 'shadow-primary-semi-transparent'
 
 export type TOpacity =
   | 'opacity-0'
@@ -5542,6 +5610,11 @@ export type TCaretColor =
   | 'caret-rose-700'
   | 'caret-rose-800'
   | 'caret-rose-900'
+  | 'caret-formal-accent'
+  | 'caret-tertiary'
+  | 'caret-primary'
+  | 'caret-primary-dark'
+  | 'caret-primary-semi-transparent'
 
 export type TWillChange =
   | 'will-change-auto'
@@ -5776,6 +5849,11 @@ export type TAccentColor =
   | 'accent-rose-800'
   | 'accent-rose-900'
   | 'accent-auto'
+  | 'accent-formal-accent'
+  | 'accent-tertiary'
+  | 'accent-primary'
+  | 'accent-primary-dark'
+  | 'accent-primary-semi-transparent'
 
 export type TScrollPadding =
   | 'scroll-p-0'
@@ -6856,6 +6934,7 @@ export type TMaxWidth =
   | 'max-w-screen-lg'
   | 'max-w-screen-xl'
   | 'max-w-screen-2xl'
+  | 'max-w-cookie'
 
 export type THeight =
   | 'h-0'
@@ -7001,6 +7080,11 @@ export type TFill =
   | 'fill-fuchsia'
   | 'fill-pink'
   | 'fill-rose'
+  | 'fill-formal-accent'
+  | 'fill-tertiary'
+  | 'fill-primary'
+  | 'fill-primary-dark'
+  | 'fill-primary-semi-transparent'
 
 export type TStroke =
   | 'stroke-inherit'
@@ -7030,6 +7114,11 @@ export type TStroke =
   | 'stroke-fuchsia'
   | 'stroke-pink'
   | 'stroke-rose'
+  | 'stroke-formal-accent'
+  | 'stroke-tertiary'
+  | 'stroke-primary'
+  | 'stroke-primary-dark'
+  | 'stroke-primary-semi-transparent'
 
 export type TStrokeWidth = 'stroke-0' | 'stroke-1' | 'stroke-2'
 
@@ -7538,6 +7627,11 @@ export type TPlaceholderColor =
   | 'placeholder-rose-700'
   | 'placeholder-rose-800'
   | 'placeholder-rose-900'
+  | 'placeholder-formal-accent'
+  | 'placeholder-tertiary'
+  | 'placeholder-primary'
+  | 'placeholder-primary-dark'
+  | 'placeholder-primary-semi-transparent'
 
 export type TPlaceholderOpacity =
   | 'placeholder-opacity-0'
@@ -7782,6 +7876,11 @@ export type TTextColor =
   | 'text-rose-700'
   | 'text-rose-800'
   | 'text-rose-900'
+  | 'text-formal-accent'
+  | 'text-tertiary'
+  | 'text-primary'
+  | 'text-primary-dark'
+  | 'text-primary-semi-transparent'
 
 export type TTextOpacity =
   | 'text-opacity-0'
@@ -8065,6 +8164,11 @@ export type TTextDecorationColor =
   | 'decoration-rose-700'
   | 'decoration-rose-800'
   | 'decoration-rose-900'
+  | 'decoration-formal-accent'
+  | 'decoration-tertiary'
+  | 'decoration-primary'
+  | 'decoration-primary-dark'
+  | 'decoration-primary-semi-transparent'
 
 export type TTextDecorationThickness =
   | 'decoration-0'

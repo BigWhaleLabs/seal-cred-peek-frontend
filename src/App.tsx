@@ -1,4 +1,5 @@
 import { Route, BrowserRouter as Router, Routes } from 'react-router-dom'
+import Cookie from 'components/Cookie'
 import Footer from 'components/Footer'
 import MainBlock from 'components/MainBlock'
 import Privacy from 'pages/Privacy'
@@ -18,6 +19,7 @@ export default function () {
           </Routes>
         </ScrollToTop>
       </Root>
+      <Cookie />
       <Footer />
     </Router>
   )

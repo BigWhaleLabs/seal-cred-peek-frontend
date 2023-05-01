@@ -4,6 +4,11 @@
 
 :root {
   --black-background: #1f2128;
+  --formal-accent: #efecd6;
+  --tertiary: #01feb6;
+  --primary: #15a1fc;
+  --primary-semi-transparent: rgba(21, 161, 252, 0.5);
+  --primary-dark: #0d0030;
 }
 
 body {
