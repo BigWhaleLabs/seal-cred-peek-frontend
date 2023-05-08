@@ -3,7 +3,6 @@ import {
   classnames,
   fontSize,
   fontWeight,
-  lineHeight,
   margin,
   textColor,
   textDecoration,
@@ -99,18 +98,4 @@ export function LinkText({
 const footerDelimiterText = classnames(grayText, fontSize('text-xs'))
 export function FooterDelimiterText({ children }: ChildrenProp) {
   return <span className={footerDelimiterText}>{children}</span>
-}
-
-export function AccentText({ children }: ChildrenProp) {
-  return <p className={textColor('text-primary')}>{children}</p>
-}
-
-const cookieText = classnames(
-  textColor('text-formal-accent'),
-  fontSize('text-base', 'sm:text-lg'),
-  fontWeight('font-bold'),
-  lineHeight('leading-6')
-)
-export function CookieText({ children }: ChildrenProp) {
-  return <p className={cookieText}>{children}</p>
 }
