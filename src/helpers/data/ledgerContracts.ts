@@ -11,22 +11,22 @@ function getLedgerContract(address: string) {
 }
 
 export default {
-  SCEmailLedger: {
-    network: Network.Goerli,
-    name: 'Email Ledger',
-    contract: getLedgerContract(env.VITE_SC_EMAIL_LEDGER_CONTRACT_ADDRESS),
-  },
   SCERC721Ledger: {
-    network: Network.Goerli,
-    name: 'Goerli ERC721 Ledger',
     contract: getLedgerContract(env.VITE_SC_ERC721_LEDGER_CONTRACT_ADDRESS),
+    name: 'Goerli ERC721 Ledger',
+    network: Network.Goerli,
+  },
+  SCEmailLedger: {
+    contract: getLedgerContract(env.VITE_SC_EMAIL_LEDGER_CONTRACT_ADDRESS),
+    name: 'Email Ledger',
+    network: Network.Goerli,
   },
   SCExternalERC721Ledger: {
-    network: Network.Mainnet,
-    name: 'Mainnet ERC721 Ledger',
     contract: getLedgerContract(
       env.VITE_SC_EXTERNAL_ERC721_LEDGER_CONTRACT_ADDRESS
     ),
+    name: 'Mainnet ERC721 Ledger',
+    network: Network.Mainnet,
   },
 } as {
   [key: string]: {

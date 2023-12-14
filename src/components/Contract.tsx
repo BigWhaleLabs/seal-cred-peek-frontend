@@ -17,9 +17,9 @@ function MintedCount({ address }: { address: string }) {
 
 const container = margin('mb-1')
 export default function ({
-  originalAddressOrEmail,
   derivativeAddress,
   network,
+  originalAddressOrEmail,
 }: {
   originalAddressOrEmail: string
   derivativeAddress: string
@@ -55,8 +55,8 @@ export default function ({
           <ContractName address={derivativeAddress} network={Network.Goerli} />
         </Link>{' '}
         <SuspenseWithError
-          fallback={<span> (loading minted count...)</span>}
           error="(error loading minted count)"
+          fallback={<span> (loading minted count...)</span>}
         >
           <MintedCount address={derivativeAddress} />
         </SuspenseWithError>

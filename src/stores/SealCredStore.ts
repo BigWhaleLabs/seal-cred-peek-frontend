@@ -24,6 +24,7 @@ async function fetchContractCountAtLedger(ledgerPromise: Promise<Ledger>) {
 }
 
 const SealCredStore = proxy<SealCredStoreType>({
+  addressToCount: {},
   ledgers: Object.entries(ledgerContracts).reduce(
     (prev, [name, { contract: ledgerContract }]) => {
       return {
@@ -33,7 +34,6 @@ const SealCredStore = proxy<SealCredStoreType>({
     },
     {}
   ),
-  addressToCount: {},
 })
 
 function fetchContractCount(contract: Derivative) {
@@ -44,7 +44,7 @@ const derivativeToOriginal = {} as { [address: string]: string }
 const wrongAddresses = {} as { [address: string]: boolean }
 function getOriginalFromDerivative(derivative: string, ledger: Ledger = {}) {
   if (derivativeToOriginal[derivative]) return derivativeToOriginal[derivative]
-  for (const { original, derivativeContract } of Object.values(ledger)) {
+  for (const { derivativeContract, original } of Object.values(ledger)) {
     if (derivativeContract.address === derivative) {
       derivativeToOriginal[derivative] = original
       return original

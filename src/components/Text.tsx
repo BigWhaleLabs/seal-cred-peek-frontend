@@ -66,20 +66,20 @@ const linkText = (active?: boolean) =>
     whiteText,
     fontSize('text-sm'),
     fontWeight('font-semibold'),
-    textDecoration({ underline: active, 'hover:underline': true })
+    textDecoration({ 'hover:underline': true, underline: active })
   )
 export function LinkText({
-  url,
   children,
   internal,
+  url,
 }: ChildrenProp & {
   url: string
   internal?: boolean
 }) {
   return internal ? (
     <NavLink
-      to={url}
       className={({ isActive }: { isActive: boolean }) => linkText(isActive)}
+      to={url}
     >
       {children}
     </NavLink>
@@ -87,8 +87,8 @@ export function LinkText({
     <a
       className={linkText()}
       href={url}
-      target="_blank"
       rel="noopener noreferrer"
+      target="_blank"
     >
       {children}
     </a>

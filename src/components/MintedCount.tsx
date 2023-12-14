@@ -24,7 +24,7 @@ function ContractCount() {
 }
 
 function MintedCount() {
-  const { ledgers, addressToCount } = useSnapshot(SealCredStore)
+  const { addressToCount, ledgers } = useSnapshot(SealCredStore)
   const counts = {} as { [name: string]: number }
   for (const name of Object.keys(ledgerContracts)) {
     const ledger = ledgers[name]
@@ -112,20 +112,20 @@ export default function () {
   return (
     <div>
       <SuspenseWithError
-        fallback={<Loading text="Loading contract count..." />}
         error="Error loading contract count"
+        fallback={<Loading text="Loading contract count..." />}
       >
         <ContractCount />
       </SuspenseWithError>
       <SuspenseWithError
-        fallback={<Loading text="Loading minted count..." />}
         error="Error loading minted count"
+        fallback={<Loading text="Loading minted count..." />}
       >
         <MintedCount />
       </SuspenseWithError>
       <SuspenseWithError
-        fallback={<Loading text="Loading posts count..." />}
         error="Error loading posts count"
+        fallback={<Loading text="Loading posts count..." />}
       >
         <PostsCount />
       </SuspenseWithError>
