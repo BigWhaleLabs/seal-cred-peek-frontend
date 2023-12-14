@@ -18,8 +18,8 @@ interface ContractNameProps {
 
 function ContractNameSuspended({
   address,
-  truncate,
   network,
+  truncate,
 }: ContractNameProps) {
   const { contractNames } = useSnapshot(ContractMetadataStore)
   const contractName = contractNames[address]
@@ -38,19 +38,19 @@ function ContractNameSuspended({
   )
 }
 
-export default memo<ContractNameProps>(({ address, truncate, network }) => (
+export default memo<ContractNameProps>(({ address, network, truncate }) => (
   <SuspenseWithError
+    error={`Error loading contract name for ${address}`}
     fallback={
       <span className={addressText}>
         {truncate ? truncateMiddleIfNeeded(address, 17) : address}
       </span>
     }
-    error={`Error loading contract name for ${address}`}
   >
     <ContractNameSuspended
       address={address}
-      truncate={truncate}
       network={network}
+      truncate={truncate}
     />
   </SuspenseWithError>
 ))

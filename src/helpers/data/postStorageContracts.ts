@@ -10,19 +10,19 @@ function getPostStorageContract(address: string) {
 }
 
 export default {
-  SCEmailLedger: {
-    name: 'Email posts',
-    contract: getPostStorageContract(env.VITE_SC_EMAIL_POSTS_CONTRACT_ADDRESS),
-  },
   SCERC721Ledger: {
-    name: 'Goerly ERC721 posts',
     contract: getPostStorageContract(env.VITE_SC_ERC721_POSTS_CONTRACT_ADDRESS),
+    name: 'Goerly ERC721 posts',
+  },
+  SCEmailLedger: {
+    contract: getPostStorageContract(env.VITE_SC_EMAIL_POSTS_CONTRACT_ADDRESS),
+    name: 'Email posts',
   },
   SCExternalERC721Ledger: {
-    name: 'Mainnet ERC721 posts',
     contract: getPostStorageContract(
       env.VITE_SC_EXTERNAL_ERC721_POSTS_CONTRACT_ADDRESS
     ),
+    name: 'Mainnet ERC721 posts',
   },
 } as {
   [key: string]: {

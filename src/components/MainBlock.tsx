@@ -18,7 +18,7 @@ export default function () {
         <Ledger />
       </SuspenseWithError>
       <SubheaderText>Previous versions snapshots:</SubheaderText>
-      {previousData.map(({ version, count, posts, ledgers }) => (
+      {previousData.map(({ count, ledgers, posts, version }) => (
         <BodyText key={version}>
           v{version} (
           {Object.entries(ledgers).map(([ledgerName, address], i) => (

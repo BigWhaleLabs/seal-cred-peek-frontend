@@ -17,8 +17,8 @@ const headerWrapper = classnames(
 )
 
 export default function ({
-  title,
   backButton,
+  title,
 }: {
   title: string
   backButton?: boolean

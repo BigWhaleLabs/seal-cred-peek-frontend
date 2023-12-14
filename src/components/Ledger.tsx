@@ -9,8 +9,8 @@ import SealCredStore from 'stores/SealCredStore'
 import ledgerContracts from 'helpers/data/ledgerContracts'
 
 function LedgerComponent({
-  variableName,
   network,
+  variableName,
 }: {
   variableName: string
   network: Network
@@ -34,12 +34,12 @@ function LedgerComponent({
       {showing &&
         Object.keys(ledger).map((contractOrEmail) => (
           <Contract
+            key={contractOrEmail}
+            network={network}
             originalAddressOrEmail={contractOrEmail}
             derivativeAddress={
               ledger[contractOrEmail].derivativeContract.address
             }
-            key={contractOrEmail}
-            network={network}
           />
         ))}
     </>
@@ -47,8 +47,8 @@ function LedgerComponent({
 }
 
 function LedgerSuspender({
-  variableName,
   network,
+  variableName,
 }: {
   variableName: string
   network: Network
@@ -56,7 +56,7 @@ function LedgerSuspender({
   return (
     <>
       <Suspense fallback={<Loading />}>
-        <LedgerComponent variableName={variableName} network={network} />
+        <LedgerComponent network={network} variableName={variableName} />
       </Suspense>
     </>
   )
@@ -69,7 +69,7 @@ export default function () {
         ([variableName, { name, network }]) => (
           <>
             <SubheaderText>{name}</SubheaderText>
-            <LedgerSuspender variableName={variableName} network={network} />
+            <LedgerSuspender network={network} variableName={variableName} />
           </>
         )
       )}

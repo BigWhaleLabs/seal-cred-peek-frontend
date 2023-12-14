@@ -12,9 +12,9 @@ export default function () {
       <Root>
         <ScrollToTop>
           <Routes>
-            <Route path="/" element={<MainBlock />} />
-            <Route path="/terms" element={<Terms />} />
-            <Route path="/privacy" element={<Privacy />} />
+            <Route element={<MainBlock />} path="/" />
+            <Route element={<Terms />} path="/terms" />
+            <Route element={<Privacy />} path="/privacy" />
           </Routes>
         </ScrollToTop>
       </Root>

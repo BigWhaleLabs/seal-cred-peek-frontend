@@ -13,8 +13,8 @@ export default class extends Component<{
   } = { hasError: false }
   static getDerivedStateFromError(error: Error) {
     return {
-      hasError: true,
       error,
+      hasError: true,
     }
   }
   render() {

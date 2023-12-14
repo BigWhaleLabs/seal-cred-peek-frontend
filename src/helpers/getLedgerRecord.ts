@@ -3,7 +3,7 @@ import { goerliProvider } from 'helpers/providers'
 
 export default function (original: string, derivative: string) {
   return {
-    original,
     derivativeContract: Derivative__factory.connect(derivative, goerliProvider),
+    original,
   }
 }
